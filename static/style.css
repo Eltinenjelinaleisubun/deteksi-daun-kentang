@@ -1,0 +1,135 @@
+/* ================= BODY ================= */
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    margin: 0;
+
+    /* WARNA LATAR */
+    background-color: #3ece8a; /* light blue */
+
+    /* GAMBAR LATAR */
+    background-image: url("images/Bc.jpeg"); /* letakkan file di static/images */
+    
+    /* Atur posisi dan ukuran gambar */
+    background-repeat: no-repeat;
+    background-size: cover;      /* memenuhi layar */
+    background-position: center; /* tengah */
+    
+    /* Overlay semi-transparan (opsional) */
+    position: relative;
+}
+
+/* Overlay dengan campuran warna agar gambar tidak terlalu terang */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(240, 248, 255, 0.5); /* semi transparan */
+    z-index: -1; /* di belakang konten */
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    background: #b47b12;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #1abc9c;
+}
+
+/* ================= CONTAINER ================= */
+.container {
+    padding: 10px;
+}
+
+/* ================= CARD ================= */
+.card {
+    position: absolute;   /* buat bisa diposisikan bebas */
+    top: 70px;            /* jarak dari atas */
+    right: 20px;          /* jarak dari kanan */
+    
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 300px;     /* diperkecil supaya tidak terlalu besar */
+}
+
+.card h2 {
+    margin-top: 0;
+    color: #2c2d2e;
+    font-size: 18px;
+}
+
+.weather-item {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+/* Main menu tengah */
+.main-menu {
+    text-align: center;
+    background: #b4e6cf;
+    padding: 20px 5px;
+    border-radius: 12px;
+    box-shadow: 0 35px 35px rgba(0,0,0,0.15);
+
+    max-width: 700px;           /* lebar maksimal kotak */
+    margin: 50px auto;          /* otomatis rata tengah horizontal, 50px jarak atas/bawah */
+}
+
+.main-menu h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.main-menu p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.btn-main {
+    display: inline-block;
+    background-color: #098f10;
+    color: white;
+    padding: 15px 25px;
+    font-size: 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-main:hover {
+    background-color: #d1ddd1;
+}
+/* ================= FOOTER ================= */
+.footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+    color: #111111;
+    font-size: 13px;
+}

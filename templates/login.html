@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:20px;
+
+            background:
+            linear-gradient(
+                rgba(0,0,0,0.5),
+                rgba(0,0,0,0.5)
+            ),
+            url('/static/images/Bc.jpeg')
+            no-repeat center/cover;
+        }
+
+        .login-container{
+            width:100%;
+            max-width:380px;
+            background:rgba(255,255,255,0.95);
+            padding:40px;
+            border-radius:18px;
+            text-align:center;
+            box-shadow:0 10px 30px rgba(0,0,0,0.35);
+            backdrop-filter:blur(5px);
+        }
+
+        h2{
+            margin-bottom:25px;
+            color:#2e7d32;
+            font-size:30px;
+        }
+
+        .flash{
+            padding:10px;
+            margin-bottom:15px;
+            border-radius:8px;
+            font-size:14px;
+        }
+
+        .flash.error{
+            background:#ffebee;
+            color:#c62828;
+        }
+
+        .flash.success{
+            background:#e8f5e9;
+            color:#2e7d32;
+        }
+
+        input{
+            width:100%;
+            padding:13px;
+            margin-bottom:16px;
+            border-radius:10px;
+            border:1px solid #ccc;
+            font-size:15px;
+            transition:0.3s;
+        }
+
+        input:focus{
+            outline:none;
+            border-color:#4CAF50;
+            box-shadow:0 0 8px rgba(76,175,80,0.4);
+        }
+
+        button{
+            width:100%;
+            padding:13px;
+            border:none;
+            border-radius:10px;
+            background:#4CAF50;
+            color:white;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#388E3C;
+            transform:scale(1.02);
+        }
+
+        .link{
+            margin-top:15px;
+            font-size:14px;
+            color:#333;
+        }
+
+        .link a{
+            color:#4CAF50;
+            text-decoration:none;
+            font-weight:bold;
+        }
+
+        .link a:hover{
+            text-decoration:underline;
+        }
+
+        .modal{
+            display:none;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.6);
+            justify-content:center;
+            align-items:center;
+            z-index:999;
+            padding:20px;
+        }
+
+        .modal-content{
+            width:100%;
+            max-width:320px;
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            text-align:center;
+            box-shadow:0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .modal-content h3{
+            margin-bottom:18px;
+            color:#2e7d32;
+        }
+
+        .modal-message{
+            margin-top:10px;
+            font-size:13px;
+        }
+
+        .modal-message.success{
+            color:green;
+        }
+
+        .modal-message.error{
+            color:red;
+        }
+
+        @media screen and (max-width:768px){
+
+            body{
+                padding:15px;
+            }
+
+            .login-container{
+                padding:28px 22px;
+                border-radius:15px;
+            }
+
+            h2{
+                font-size:25px;
+            }
+
+            input{
+                padding:12px;
+                font-size:16px;
+            }
+
+            button{
+                padding:12px;
+                font-size:16px;
+            }
+
+            .link{
+                font-size:13px;
+            }
+
+            .modal-content{
+                padding:20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <h2>🌿 Login</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            {% for category, message in messages %}
+
+                <div class="flash {{ category }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+    <!-- FORM LOGIN -->
+
+    <form method="POST">
+
+        <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            required
+        >
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+        >
+
+        <button type="submit">
+            Masuk
+        </button>
+
+    </form>
+
+    <!-- FORGOT PASSWORD -->
+
+    <div class="link">
+
+        <a href="#" onclick="openModal()">
+            Lupa Password?
+        </a>
+
+    </div>
+
+    <!-- REGISTER -->
+
+    <div class="link">
+
+        Belum punya akun?
+        <a href="/register">
+            Daftar
+        </a>
+
+    </div>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <h3>Reset Password</h3>
+
+        <!-- PERBAIKAN DI SINI -->
+
+        <form
+            method="POST"
+            action="/send-otp"
+            onsubmit="return handleSubmit()"
+        >
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Masukkan Email"
+                required
+            >
+
+            <button type="submit">
+                Kirim OTP
+            </button>
+
+        </form>
+
+        <div
+            id="message"
+            class="modal-message">
+        </div>
+
+        <br>
+
+        <button onclick="closeModal()">
+            Tutup
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function openModal(){
+
+    document.getElementById("modal")
+    .style.display = "flex";
+
+}
+
+function closeModal(){
+
+    document.getElementById("modal")
+    .style.display = "none";
+
+    document.getElementById("message")
+    .innerHTML = "";
+
+}
+
+function handleSubmit(){
+
+    let email =
+    document.getElementById("email").value;
+
+    let msg =
+    document.getElementById("message");
+
+    if(!email.includes("@")){
+
+        msg.innerHTML = "Email tidak valid!";
+        msg.className = "modal-message error";
+
+        return false;
+
+    }
+
+    msg.innerHTML = "Mengirim OTP...";
+    msg.className = "modal-message success";
+
+    return true;
+
+}
+
+window.onclick = function(event){
+
+    let modal =
+    document.getElementById("modal");
+
+    if(event.target === modal){
+
+        modal.style.display = "none";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

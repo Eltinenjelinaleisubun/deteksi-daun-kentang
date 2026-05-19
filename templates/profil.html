@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <!-- RESPONSIVE MOBILE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profil</title>
+
+    <style>
+
+        /* ================= RESET ================= */
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* ================= BODY ================= */
+
+        body{
+            min-height:100vh;
+            color:#fff;
+            overflow-x:hidden;
+            position:relative;
+            padding:20px;
+            background:#000;
+        }
+
+        /* ================= BACKGROUND ================= */
+
+        body::before{
+            content:"";
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+
+            background:
+            url('/static/images/Bc.jpeg')
+            no-repeat center/cover;
+
+            filter:blur(10px) brightness(0.6);
+
+            z-index:-2;
+        }
+
+        body::after{
+            content:"";
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.4);
+            z-index:-1;
+        }
+
+        /* ================= PROFILE CONTAINER ================= */
+
+        .profile-container{
+            width:100%;
+            max-width:500px;
+            margin:50px auto;
+
+            background:rgba(255,255,255,0.95);
+
+            border-radius:18px;
+
+            padding:35px;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.35);
+
+            text-align:center;
+
+            color:#333;
+
+            backdrop-filter:blur(5px);
+        }
+
+        /* ================= TITLE ================= */
+
+        .profile-container h2{
+            margin-bottom:25px;
+            color:#2e7d32;
+            font-size:30px;
+        }
+
+        /* ================= PROFILE INFO ================= */
+
+        .profile-info{
+            margin-bottom:25px;
+            font-size:16px;
+            line-height:1.8;
+        }
+
+        .profile-info strong{
+            color:#2e7d32;
+        }
+
+        /* ================= LABEL ================= */
+
+        label{
+            display:block;
+            text-align:left;
+            margin-bottom:8px;
+            font-weight:bold;
+            color:#444;
+        }
+
+        /* ================= INPUT ================= */
+
+        input[type="password"]{
+            width:100%;
+            padding:13px;
+            border-radius:10px;
+            border:1px solid #ccc;
+            margin-bottom:20px;
+            font-size:15px;
+            transition:0.3s;
+        }
+
+        input[type="password"]:focus{
+            outline:none;
+            border-color:#4CAF50;
+            box-shadow:0 0 8px rgba(76,175,80,0.4);
+        }
+
+        /* ================= BUTTON ================= */
+
+        button{
+            width:100%;
+            padding:13px;
+            border:none;
+            border-radius:10px;
+
+            background:#4CAF50;
+
+            color:white;
+
+            font-size:16px;
+            font-weight:bold;
+
+            cursor:pointer;
+
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#388E3C;
+            transform:scale(1.02);
+        }
+
+        /* ================= MESSAGE ================= */
+
+        .message{
+            margin-top:18px;
+            padding:10px;
+            border-radius:8px;
+            font-size:14px;
+        }
+
+        .message.success{
+            background:#e8f5e9;
+            color:#2e7d32;
+        }
+
+        .message.error{
+            background:#ffebee;
+            color:#c62828;
+        }
+
+        /* ================= LINK ================= */
+
+        .link{
+            margin-top:22px;
+            font-size:14px;
+        }
+
+        .link a{
+            color:#4CAF50;
+            text-decoration:none;
+            font-weight:bold;
+        }
+
+        .link a:hover{
+            text-decoration:underline;
+        }
+
+        /* ================= RESPONSIVE MOBILE ================= */
+
+        @media screen and (max-width:768px){
+
+            body{
+                padding:15px;
+            }
+
+            .profile-container{
+                margin:30px auto;
+                padding:25px 20px;
+                border-radius:15px;
+            }
+
+            .profile-container h2{
+                font-size:25px;
+            }
+
+            .profile-info{
+                font-size:15px;
+            }
+
+            input[type="password"]{
+                padding:12px;
+                font-size:16px;
+            }
+
+            button{
+                padding:12px;
+                font-size:16px;
+            }
+
+            .link{
+                font-size:13px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- ================= PROFILE ================= -->
+
+<div class="profile-container">
+
+    <h2>
+        👤 Profil Pengguna
+    </h2>
+
+    <!-- INFO USER -->
+
+    <div class="profile-info">
+
+        <p>
+            <strong>Username:</strong>
+            {{ session['user'] }}
+        </p>
+
+    </div>
+
+    <!-- FORM PASSWORD -->
+
+    <form method="POST">
+
+    <a
+        href="{{ url_for('send_otp_route') }}"
+        style="
+        display:block;
+        margin-bottom:15px;
+        background:#4CAF50;
+        color:white;
+        padding:10px;
+        border-radius:10px;
+        text-decoration:none;
+        "
+    >
+        Kirim OTP ke Email
+    </a>
+
+    <input
+        type="text"
+        name="otp"
+        placeholder="Masukkan OTP"
+        required
+    >
+
+    <input
+        type="password"
+        name="new_password"
+        placeholder="Password Baru"
+        required
+    >
+
+    <input
+        type="password"
+        name="confirm_password"
+        placeholder="Konfirmasi Password Baru"
+        required
+    >
+
+    <button type="submit">
+        Simpan Password Baru
+    </button>
+
+</form>
+
+    <!-- MESSAGE -->
+
+    {% if message %}
+
+        <div class="message {{ message_category }}">
+            {{ message }}
+        </div>
+
+    {% endif %}
+
+    <!-- LINK -->
+
+    <div class="link">
+
+        <a href="/home">
+            ← Kembali ke Beranda
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

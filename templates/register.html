@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <!-- RESPONSIVE MOBILE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register</title>
+
+    <!-- FONT AWESOME -->
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* ================= RESET ================= */
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        /* ================= BODY ================= */
+
+        body{
+            min-height:100vh;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            padding:20px;
+
+            background:
+            linear-gradient(
+                rgba(0,0,0,0.45),
+                rgba(0,0,0,0.45)
+            ),
+            url('/static/images/Bc.jpeg')
+            no-repeat center/cover;
+        }
+
+        /* ================= REGISTER CONTAINER ================= */
+
+        .register-container{
+
+            width:100%;
+            max-width:400px;
+
+            padding:40px;
+
+            border-radius:18px;
+
+            backdrop-filter:blur(15px);
+
+            background:rgba(255,255,255,0.12);
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.35);
+
+            text-align:center;
+
+            color:white;
+
+            animation:fadeIn 0.8s ease;
+        }
+
+        /* ================= ANIMATION ================= */
+
+        @keyframes fadeIn{
+
+            from{
+                opacity:0;
+                transform:translateY(20px);
+            }
+
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+
+        }
+
+        /* ================= TITLE ================= */
+
+        .register-container h2{
+
+            margin-bottom:25px;
+
+            font-size:32px;
+
+            font-weight:600;
+        }
+
+        /* ================= INPUT GROUP ================= */
+
+        .input-group{
+
+            position:relative;
+
+            margin-bottom:18px;
+        }
+
+        .input-group i{
+
+            position:absolute;
+
+            top:50%;
+            left:14px;
+
+            transform:translateY(-50%);
+
+            color:#ddd;
+
+            font-size:15px;
+        }
+
+        .input-group input{
+
+            width:100%;
+
+            padding:13px 13px 13px 42px;
+
+            border:none;
+
+            border-radius:12px;
+
+            outline:none;
+
+            background:rgba(255,255,255,0.18);
+
+            color:white;
+
+            font-size:15px;
+
+            transition:0.3s;
+        }
+
+        .input-group input::placeholder{
+
+            color:#eee;
+        }
+
+        .input-group input:focus{
+
+            background:rgba(67, 148, 67, 0.7);
+
+            box-shadow:0 0 12px rgba(67,148,67,0.8);
+        }
+
+        /* ================= BUTTON ================= */
+
+        button{
+
+            width:100%;
+
+            padding:13px;
+
+            border:none;
+
+            border-radius:12px;
+
+            background:white;
+
+            color:#1b1b1b;
+
+            font-size:16px;
+
+            font-weight:bold;
+
+            cursor:pointer;
+
+            transition:0.3s;
+        }
+
+        button:hover{
+
+            transform:translateY(-2px);
+
+            box-shadow:0 5px 15px rgba(0,0,0,0.3);
+
+            background:#f1f1f1;
+        }
+
+        /* ================= LOGIN LINK ================= */
+
+        .login-link{
+
+            margin-top:22px;
+
+            font-size:14px;
+        }
+
+        .login-link a{
+
+            color:#7CFF75;
+
+            text-decoration:none;
+
+            font-weight:600;
+        }
+
+        .login-link a:hover{
+
+            text-decoration:underline;
+        }
+
+        /* ================= FLASH ================= */
+
+        .flash{
+
+            padding:12px;
+
+            border-radius:10px;
+
+            margin-bottom:16px;
+
+            font-size:14px;
+        }
+
+        .flash.success{
+
+            background:rgba(12,235,12,0.25);
+
+            border:1px solid rgba(12,235,12,0.5);
+        }
+
+        .flash.error{
+
+            background:rgba(255,0,0,0.2);
+
+            border:1px solid rgba(255,0,0,0.4);
+        }
+
+        /* ================= RESPONSIVE MOBILE ================= */
+
+        @media screen and (max-width:768px){
+
+            body{
+                padding:15px;
+            }
+
+            .register-container{
+
+                padding:30px 22px;
+
+                border-radius:16px;
+            }
+
+            .register-container h2{
+
+                font-size:28px;
+            }
+
+            .input-group input{
+
+                padding:12px 12px 12px 42px;
+
+                font-size:16px;
+            }
+
+            button{
+
+                padding:12px;
+
+                font-size:16px;
+            }
+
+            .login-link{
+
+                font-size:13px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- ================= REGISTER BOX ================= -->
+
+<div class="register-container">
+
+    <h2>
+        🌿 Buat Akun
+    </h2>
+
+    <!-- FLASH MESSAGE -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            {% for category, message in messages %}
+
+                <div class="flash {{ category }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+    <!-- FORM REGISTER -->
+
+    <form method="POST">
+
+        <!-- USERNAME -->
+
+        <div class="input-group">
+
+            <i class="fas fa-user"></i>
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Username"
+                required
+            >
+
+        </div>
+
+        <!-- EMAIL -->
+
+        <div class="input-group">
+
+            <i class="fas fa-envelope"></i>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                required
+            >
+
+        </div>
+
+        <!-- PASSWORD -->
+
+        <div class="input-group">
+
+            <i class="fas fa-lock"></i>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+            >
+
+        </div>
+
+        <!-- BUTTON -->
+
+        <button type="submit">
+            Daftar
+        </button>
+
+    </form>
+
+    <!-- LOGIN LINK -->
+
+    <div class="login-link">
+
+        Sudah punya akun?
+
+        <a href="{{ url_for('login') }}">
+            Login
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

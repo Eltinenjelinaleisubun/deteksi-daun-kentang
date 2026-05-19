@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<!-- RESPONSIVE MOBILE -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Deteksi Penyakit Kentang</title>
+
+<style>
+
+    *{
+        box-sizing:border-box;
+        margin:0;
+        padding:0;
+    }
+
+    body{
+        font-family:'Segoe UI', Tahoma, sans-serif;
+        min-height:100vh;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        position:relative;
+        background:#b1d1ae;
+        padding:20px;
+    }
+
+    /* ================= BACKGROUND ================= */
+
+    .background{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background-image:url("{{ url_for('static', filename='images/Bc.jpeg') }}");
+        background-size:cover;
+        background-position:center;
+        filter:blur(10px) brightness(0.6);
+        z-index:-1;
+    }
+
+    /* ================= HEADER ================= */
+
+    header{
+        width:100%;
+        max-width:900px;
+        margin-top:20px;
+        padding:15px 20px;
+        background:#b47b12;
+        color:white;
+        font-size:1.5em;
+        font-weight:bold;
+        border-radius:15px;
+        text-align:center;
+        box-shadow:0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    /* ================= BUTTON BERANDA ================= */
+
+    .home-top{
+        position:fixed;
+        top:20px;
+        right:20px;
+        background:#4CAF50;
+        color:white;
+        padding:10px 18px;
+        border-radius:10px;
+        text-decoration:none;
+        font-size:0.9em;
+        font-weight:bold;
+        box-shadow:0 4px 10px rgba(0,0,0,0.3);
+        z-index:999;
+        transition:0.3s;
+    }
+
+    .home-top:hover{
+        background:#388E3C;
+    }
+
+    /* ================= CONTAINER ================= */
+
+    .upload-container{
+        margin-top:30px;
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+        background:rgba(180,230,207,0.95);
+        padding:25px;
+        border-radius:18px;
+        max-width:450px;
+        width:100%;
+        box-shadow:0 8px 25px rgba(0,0,0,0.25);
+        backdrop-filter:blur(3px);
+    }
+
+    /* ================= BUTTON ================= */
+
+    .upload-btn{
+        background:white;
+        padding:14px;
+        border-radius:12px;
+        text-align:center;
+        cursor:pointer;
+        font-size:1em;
+        font-weight:bold;
+        transition:0.3s;
+    }
+
+    .upload-btn:hover{
+        background:#f0f0f0;
+    }
+
+    input[type="file"]{
+        display:none;
+    }
+
+    /* ================= VIDEO ================= */
+
+    video{
+        width:100%;
+        border-radius:15px;
+        background:black;
+    }
+
+    /* ================= CAMERA BUTTON ================= */
+
+    .camera-btn{
+        background:#ff9800;
+        color:white;
+        padding:12px;
+        border:none;
+        border-radius:12px;
+        cursor:pointer;
+        font-size:1em;
+        font-weight:bold;
+        transition:0.3s;
+    }
+
+    .camera-btn:hover{
+        background:#e68900;
+    }
+
+    /* ================= PREVIEW ================= */
+
+    .preview{
+        width:100%;
+        min-height:220px;
+        border:2px dashed white;
+        border-radius:15px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:rgba(0,0,0,0.15);
+        color:white;
+        font-size:1em;
+        overflow:hidden;
+    }
+
+    .preview img{
+        width:100%;
+        border-radius:15px;
+    }
+
+    /* ================= DETECT BUTTON ================= */
+
+    #deteksiBtn{
+        background:green;
+        color:white;
+        padding:14px;
+        border:none;
+        border-radius:12px;
+        cursor:pointer;
+        font-size:1em;
+        font-weight:bold;
+        transition:0.3s;
+    }
+
+    #deteksiBtn:hover{
+        background:#006400;
+    }
+
+    /* ================= RESPONSIVE MOBILE ================= */
+
+    @media screen and (max-width:768px){
+
+        body{
+            padding:15px;
+        }
+
+        header{
+            font-size:1.2em;
+            padding:14px;
+            margin-top:70px;
+        }
+
+        .home-top{
+            top:15px;
+            right:15px;
+            padding:8px 14px;
+            font-size:0.8em;
+        }
+
+        .upload-container{
+            padding:18px;
+            gap:12px;
+        }
+
+        .upload-btn,
+        .camera-btn,
+        #deteksiBtn{
+            width:100%;
+            font-size:15px;
+            padding:12px;
+        }
+
+        .preview{
+            min-height:180px;
+            font-size:14px;
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+    🌿 Patogen Kentang Detector
+</header>
+
+<!-- ================= BUTTON BERANDA ================= -->
+
+<a href="{{ url_for('home') }}" class="home-top">
+    🏠 Beranda
+</a>
+
+<!-- ================= CONTAINER ================= -->
+
+<div class="upload-container">
+
+    <!-- UPLOAD GALERI -->
+
+    <label class="upload-btn">
+
+        📁 Unggah dari Galeri
+
+        <input
+            type="file"
+            id="galleryInput"
+            accept="image/*"
+        >
+
+    </label>
+
+    <!-- VIDEO CAMERA -->
+
+    <video
+        id="video"
+        autoplay
+        playsinline>
+    </video>
+
+    <!-- CAMERA BUTTON -->
+
+    <button
+        type="button"
+        class="camera-btn"
+        id="captureBtn">
+
+        📸 Jepret Kamera
+
+    </button>
+
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <!-- PREVIEW -->
+
+    <div class="preview" id="preview">
+        Preview Gambar
+    </div>
+
+    <!-- FORM -->
+
+    <form
+        id="deteksiForm"
+        method="POST"
+        enctype="multipart/form-data">
+    </form>
+
+    <!-- DETECT BUTTON -->
+
+    <button
+        id="deteksiBtn"
+        type="submit"
+        form="deteksiForm">
+
+        🔍 Deteksi
+
+    </button>
+
+</div>
+
+<script>
+
+const galleryInput = document.getElementById("galleryInput");
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+const preview = document.getElementById("preview");
+const form = document.getElementById("deteksiForm");
+
+
+// ================= GALERI =================
+
+galleryInput.addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(!file) return;
+
+    showPreview(file);
+
+    setFormFile(file);
+
+});
+
+
+// ================= CAMERA =================
+
+navigator.mediaDevices.getUserMedia({
+
+    video:{
+        facingMode:"environment"
+    }
+
+})
+
+.then(stream => {
+
+    video.srcObject = stream;
+
+})
+
+.catch(err => {
+
+    alert("Kamera tidak bisa dibuka: " + err);
+
+});
+
+
+// ================= JEPRET =================
+
+document.getElementById("captureBtn")
+.addEventListener("click", function(){
+
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    ctx.drawImage(video, 0, 0);
+
+    canvas.toBlob(blob => {
+
+        const file = new File(
+            [blob],
+            "camera.jpg",
+            { type:"image/jpeg" }
+        );
+
+        showPreview(file);
+
+        setFormFile(file);
+
+    }, "image/jpeg");
+
+});
+
+
+// ================= PREVIEW =================
+
+function showPreview(file){
+
+    const reader = new FileReader();
+
+    reader.onload = e => {
+
+        preview.innerHTML =
+        `<img src="${e.target.result}">`;
+
+    };
+
+    reader.readAsDataURL(file);
+
+}
+
+
+// ================= FORM FILE =================
+
+function setFormFile(file){
+
+    form.innerHTML = "";
+
+    const dt = new DataTransfer();
+
+    dt.items.add(file);
+
+    const input = document.createElement("input");
+
+    input.type = "file";
+    input.name = "image";
+    input.files = dt.files;
+
+    form.appendChild(input);
+
+}
+
+</script>
+
+</body>
+</html>
