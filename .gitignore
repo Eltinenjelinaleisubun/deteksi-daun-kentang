@@ -1,0 +1,8 @@
+database.db
+uploads/
+static/uploads/
+dataset/
+model/
+__pycache__/
+*.pyc
+*.h5
