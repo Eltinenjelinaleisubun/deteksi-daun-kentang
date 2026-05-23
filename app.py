@@ -15,6 +15,7 @@ import sqlite3
 import numpy as np
 import random
 import smtplib
+import tensorflow as tf
 
 from email.mime.text import MIMEText
 
@@ -28,6 +29,12 @@ from werkzeug.utils import secure_filename
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
+
+# =====================================================
+# REDUCE TENSORFLOW LOG
+# =====================================================
+
+tf.get_logger().setLevel('ERROR')
 
 # =====================================================
 # CONFIG
@@ -47,6 +54,8 @@ class Config:
     # ================= UPLOAD =================
     UPLOAD_FOLDER = 'static/uploads'
 
+    MAX_CONTENT_LENGTH = 5 * 1024 * 1024
+
     ALLOWED_EXTENSIONS = {
         'png',
         'jpg',
@@ -61,7 +70,7 @@ class Config:
     # GANTI DENGAN EMAIL KAMU
     MAIL_USERNAME = 'emailkamu@gmail.com'
 
-    # GANTI DENGAN PASSWORD APLIKASI GMAIL
+    # GANTI DENGAN PASSWORD APLIKASI
     MAIL_PASSWORD = 'password_aplikasi_gmail'
 
 
@@ -72,6 +81,8 @@ class Config:
 app = Flask(__name__)
 
 app.config.from_object(Config)
+
+print("FLASK APP START")
 
 # =====================================================
 # EMAIL CONFIG
@@ -85,6 +96,7 @@ EMAIL_PASSWORD = app.config['MAIL_PASSWORD']
 # =====================================================
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+os.makedirs('model', exist_ok=True)
 
 # =====================================================
 # DATABASE CONNECTION
@@ -135,31 +147,63 @@ def init_db():
 
 init_db()
 
+print("DATABASE READY")
+
 # =====================================================
 # LOAD MODEL
 # =====================================================
 
-if not os.path.exists(app.config['MODEL_PATH']):
+model = None
 
-    print("Model tidak ditemukan!")
+try:
+
+    if os.path.exists(app.config['MODEL_PATH']):
+
+        print("Mulai load model...")
+
+        model = load_model(app.config['MODEL_PATH'])
+
+        print("MODEL BERHASIL DIMUAT")
+
+    else:
+
+        print("MODEL TIDAK DITEMUKAN")
+
+except Exception as e:
+
+    print("ERROR LOAD MODEL:")
+    print(e)
 
     model = None
-
-else:
-
-    model = load_model(app.config['MODEL_PATH'])
-
-    print("Model berhasil dimuat")
 
 # =====================================================
 # LOAD LABEL
 # =====================================================
 
-with open('model/class_indices.json') as f:
+labels = {}
 
-    class_indices = json.load(f)
+try:
 
-labels = dict((v, k) for k, v in class_indices.items())
+    json_path = 'model/class_indices.json'
+
+    if os.path.exists(json_path):
+
+        with open(json_path) as f:
+
+            class_indices = json.load(f)
+
+        labels = dict((v, k) for k, v in class_indices.items())
+
+        print("LABEL BERHASIL DIMUAT")
+
+    else:
+
+        print("class_indices.json tidak ditemukan")
+
+except Exception as e:
+
+    print("ERROR LOAD LABEL:")
+    print(e)
 
 # =====================================================
 # HELPER
@@ -221,39 +265,49 @@ def predict_image(img_path):
 
         return "Model tidak tersedia", 0
 
-    # LOAD IMAGE
-    img = image.load_img(
-        img_path,
-        target_size=(224, 224)
-    )
+    try:
 
-    # IMAGE TO ARRAY
-    img_array = image.img_to_array(img)
+        # LOAD IMAGE
+        img = image.load_img(
+            img_path,
+            target_size=(224, 224)
+        )
 
-    # PREPROCESS
-    img_array = preprocess_input(img_array)
+        # IMAGE TO ARRAY
+        img_array = image.img_to_array(img)
 
-    # EXPAND DIMENSION
-    img_array = np.expand_dims(img_array, axis=0)
+        # PREPROCESS
+        img_array = preprocess_input(img_array)
 
-    # PREDICT
-    pred = model.predict(img_array)
+        # EXPAND DIMENSION
+        img_array = np.expand_dims(img_array, axis=0)
 
-    # CLASS INDEX
-    class_idx = np.argmax(pred)
+        # PREDICT
+        pred = model.predict(img_array)
 
-    # CONFIDENCE
-    confidence = float(np.max(pred)) * 100
+        # CLASS INDEX
+        class_idx = np.argmax(pred)
 
-    # ================= FILTER NON DAUN =================
-    if confidence < 70:
+        # CONFIDENCE
+        confidence = float(np.max(pred)) * 100
 
-        return "Error: Gambar bukan daun kentang", round(confidence, 2)
+        # FILTER NON DAUN
+        if confidence < 70:
 
-    # LABEL
-    result = labels.get(class_idx, "Unknown")
+            return "Error: Gambar bukan daun kentang", round(confidence, 2)
 
-    return result, round(confidence, 2)
+        # LABEL
+        result = labels.get(class_idx, "Unknown")
+
+        return result, round(confidence, 2)
+
+    except Exception as e:
+
+        print("ERROR PREDICT:")
+        print(e)
+
+        return "Terjadi error saat prediksi", 0
+
 # =====================================================
 # LOGIN
 # =====================================================
@@ -320,7 +374,6 @@ def register():
 
         c = conn.cursor()
 
-        # CHECK USERNAME
         c.execute(
             "SELECT * FROM users WHERE username=?",
             (username,)
@@ -336,7 +389,6 @@ def register():
 
             return redirect(url_for('register'))
 
-        # INSERT USER
         c.execute(
             '''
             INSERT INTO users (
@@ -398,8 +450,6 @@ def profil():
 
     user = c.fetchone()
 
-    # ================= UBAH PASSWORD =================
-
     if request.method == 'POST':
 
         otp_input = request.form['otp']
@@ -408,7 +458,6 @@ def profil():
 
         confirm_password = request.form['confirm_password']
 
-        # CEK OTP
         if otp_input != session.get('otp'):
 
             conn.close()
@@ -420,7 +469,6 @@ def profil():
                 message_category='error'
             )
 
-        # CEK PASSWORD
         if new_password != confirm_password:
 
             conn.close()
@@ -436,7 +484,6 @@ def profil():
             new_password
         )
 
-        # UPDATE PASSWORD
         c.execute(
             '''
             UPDATE users
@@ -501,73 +548,21 @@ def send_otp_route():
 
             return redirect(url_for('profil'))
 
-        # GENERATE OTP
         otp = str(random.randint(100000, 999999))
 
-        # SIMPAN OTP
         session['otp'] = otp
 
-        print("OTP:", otp)
-
-        print("EMAIL:", user['email'])
-
-        # KIRIM EMAIL
         send_otp(user['email'], otp)
 
         flash('OTP berhasil dikirim ke email', 'success')
 
     except Exception as e:
 
-        print("ERROR OTP:")
         print(e)
 
         flash(f'Gagal mengirim OTP: {e}', 'error')
 
     return redirect(url_for('profil'))
-
-# =====================================================
-# RESET PASSWORD DARI LOGIN
-# =====================================================
-
-@app.route('/reset-password', methods=['POST'])
-def reset_password():
-
-    email = request.form['email']
-
-    conn = get_db_connection()
-
-    c = conn.cursor()
-
-    c.execute(
-        "SELECT * FROM users WHERE email=?",
-        (email,)
-    )
-
-    user = c.fetchone()
-
-    conn.close()
-
-    if not user:
-
-        flash('Email tidak ditemukan', 'error')
-
-        return redirect(url_for('login'))
-
-    otp = str(random.randint(100000, 999999))
-
-    session['reset_otp'] = otp
-
-    try:
-
-        send_otp(email, otp)
-
-        flash('OTP berhasil dikirim ke email', 'success')
-
-    except Exception as e:
-
-        flash(f'Gagal mengirim OTP: {e}', 'error')
-
-    return redirect(url_for('login'))
 
 # =====================================================
 # DETECT
@@ -582,7 +577,6 @@ def detect():
 
     if request.method == 'POST':
 
-        # VALIDASI FILE
         if 'image' not in request.files:
 
             flash('File tidak ditemukan', 'error')
@@ -591,14 +585,12 @@ def detect():
 
         file = request.files['image']
 
-        # FILE KOSONG
         if file.filename == '':
 
             flash('File kosong', 'error')
 
             return redirect(request.url)
 
-        # VALIDASI FORMAT
         if file and allowed_file(file.filename):
 
             ext = file.filename.rsplit('.', 1)[1].lower()
@@ -612,13 +604,10 @@ def detect():
                 filename
             )
 
-            # SAVE IMAGE
             file.save(filepath)
 
-            # PREDICT
             result, confidence = predict_image(filepath)
 
-            # SAVE HISTORY
             conn = get_db_connection()
 
             c = conn.cursor()
@@ -709,10 +698,26 @@ def logout():
     return redirect(url_for('login'))
 
 # =====================================================
+# TEST ROUTE
+# =====================================================
+
+@app.route('/test')
+def test():
+
+    return "FLASK BERHASIL BERJALAN"
+
+# =====================================================
 # RUN APP
 # =====================================================
 
 if __name__ == "__main__":
-    import os
+
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+
+    print("PORT:", port)
+
+    app.run(
+        host="0.0.0.0",
+        port=port,
+        debug=False
+    )
