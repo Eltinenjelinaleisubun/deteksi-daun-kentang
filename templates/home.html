@@ -5,13 +5,10 @@
 
     <meta charset="UTF-8">
 
-    <!-- RESPONSIVE MOBILE -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>Beranda - Sistem Deteksi Penyakit</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+    <title>Deteksi Penyakit Kentang</title>
 
     <style>
 
@@ -28,10 +25,9 @@
         body{
             font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height:100vh;
-            background:#000;
-            position:relative;
             color:white;
             overflow-x:hidden;
+            position:relative;
         }
 
         /* ================= BACKGROUND ================= */
@@ -43,189 +39,149 @@
             left:0;
             width:100%;
             height:100%;
-            background:url('/static/images/Bc.jpeg')
-            no-repeat center/cover;
-            filter:blur(10px) brightness(0.6);
+
+            background:
+            url('/static/images/Bc.jpeg')
+            no-repeat center center/cover;
+
+            filter:
+            blur(8px)
+            brightness(0.45);
+
+            transform:scale(1.08);
+
             z-index:-2;
         }
 
         body::after{
             content:"";
             position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background:rgba(0,0,0,0.3);
+            inset:0;
+            background:
+            rgba(0,0,0,0.18);
             z-index:-1;
-        }
-
-        /* ================= NAVBAR ================= */
-
-        .navbar{
-            padding:35px 22px 10px;
-        }
-
-        .navbar h1{
-            font-size:22px;
-            font-weight:700;
-            margin-bottom:35px;
-
-            white-space:nowrap;
-            overflow:hidden;
-            text-overflow:ellipsis;
-        }
-
-        /* ================= MENU ================= */
-
-        .nav-links{
-            display:flex;
-            flex-direction:column;
-            gap:10px;
-        }
-
-        .nav-links a{
-            text-decoration:none;
-            color:white;
-
-            padding:20px 0;
-
-            font-size:20px;
-            font-weight:bold;
-
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-
-            border-bottom:1px solid rgba(255,255,255,0.15);
-
-            transition:0.3s;
-        }
-
-        .nav-links a:hover{
-            transform:translateX(5px);
-        }
-
-        .menu-left{
-            display:flex;
-            align-items:center;
-            gap:14px;
-        }
-
-        .icon{
-            width:30px;
-            text-align:center;
-        }
-
-        .arrow{
-            font-size:34px;
-            color:white;
         }
 
         /* ================= CONTAINER ================= */
 
         .container{
             width:100%;
-            max-width:1200px;
+            max-width:500px;
             margin:auto;
-            padding:25px 20px;
+            padding:70px 20px 40px;
         }
 
-        /* ================= MAIN MENU ================= */
+        /* ================= TITLE ================= */
 
-        .main-menu{
-            background:rgba(255,255,255,0.92);
-            border-radius:25px;
-            padding:30px 25px;
-            box-shadow:0 6px 20px rgba(0,0,0,0.25);
-            backdrop-filter:blur(4px);
-            color:#333;
-            margin-top:25px;
+        .title{
+            display:flex;
+            align-items:center;
+            gap:16px;
+
+            margin-bottom:45px;
         }
 
-        .main-menu h2{
-            margin-bottom:18px;
+        .title-icon{
+            font-size:40px;
+        }
+
+        .title h1{
             font-size:28px;
-            color:#2e7d32;
+            line-height:1.4;
+            font-weight:700;
         }
 
-        .main-menu p{
-            margin-bottom:25px;
-            font-size:16px;
-            line-height:1.7;
+        /* ================= MENU ================= */
+
+        .menu{
+            width:100%;
         }
 
-        /* ================= BUTTON ================= */
-
-        .btn-main{
-            display:block;
+        .menu-item{
             width:100%;
 
-            background:#4CAF50;
-            color:white;
-
-            padding:15px;
-
-            border-radius:12px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
 
             text-decoration:none;
-            font-weight:bold;
+            color:white;
+
+            padding:28px 5px;
+
+            border-bottom:
+            1px solid rgba(255,255,255,0.18);
 
             transition:0.3s;
-            font-size:16px;
+        }
 
+        .menu-item:hover{
+            background:
+            rgba(255,255,255,0.04);
+        }
+
+        /* ================= LEFT ================= */
+
+        .menu-left{
+            display:flex;
+            align-items:center;
+            gap:20px;
+        }
+
+        .menu-icon{
+            font-size:38px;
+            width:42px;
             text-align:center;
         }
 
-        .btn-main:hover{
-            background:#388E3C;
+        .menu-text{
+            font-size:24px;
+            font-weight:600;
         }
 
-        /* ================= FOOTER ================= */
+        /* ================= RIGHT ARROW ================= */
 
-        .footer{
-            text-align:center;
-            padding:20px;
-            background:rgba(0,0,0,0.5);
-            margin-top:30px;
-            font-size:14px;
-            backdrop-filter:blur(5px);
+        .arrow{
+            font-size:46px;
+            font-weight:300;
+            opacity:0.9;
         }
 
-        /* ================= DESKTOP ================= */
+        /* ================= MOBILE ================= */
 
-        @media screen and (min-width:769px){
+        @media screen and (max-width:768px){
 
-            .navbar{
-                max-width:900px;
-                margin:auto;
-                padding-top:45px;
+            .container{
+                padding:
+                65px 18px 30px;
             }
 
-            .navbar h1{
-                font-size:48px;
-                white-space:normal;
+            .title{
+                margin-bottom:40px;
             }
 
-            .nav-links{
-                gap:15px;
+            .title h1{
+                font-size:24px;
             }
 
-            .nav-links a{
-                font-size:28px;
+            .title-icon{
+                font-size:34px;
+            }
+
+            .menu-item{
                 padding:24px 0;
             }
 
-            .container{
-                max-width:900px;
+            .menu-icon{
+                font-size:32px;
             }
 
-            .main-menu h2{
-                font-size:36px;
+            .menu-text{
+                font-size:20px;
             }
 
-            .main-menu p{
-                font-size:18px;
+            .arrow{
+                font-size:38px;
             }
 
         }
@@ -236,106 +192,142 @@
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
-
-    <div class="navbar">
-
-        <h1>
-            🌿 Deteksi Penyakit Tanaman Kentang
-        </h1>
-
-        <div class="nav-links">
-
-            <a href="{{ url_for('home') }}">
-
-                <div class="menu-left">
-                    <span class="icon">🏠</span>
-                    <span>Beranda</span>
-                </div>
-
-                <span class="arrow">›</span>
-
-            </a>
-
-            <a href="{{ url_for('history') }}">
-
-                <div class="menu-left">
-                    <span class="icon">📋</span>
-                    <span>Riwayat</span>
-                </div>
-
-                <span class="arrow">›</span>
-
-            </a>
-
-            <a href="{{ url_for('profil') }}">
-
-                <div class="menu-left">
-                    <span class="icon">👤</span>
-                    <span>Profil</span>
-                </div>
-
-                <span class="arrow">›</span>
-
-            </a>
-
-            <a href="{{ url_for('informasi') }}">
-
-                <div class="menu-left">
-                    <span class="icon">ℹ️</span>
-                    <span>Informasi</span>
-                </div>
-
-                <span class="arrow">›</span>
-
-            </a>
-
-            <a href="{{ url_for('logout') }}">
-
-                <div class="menu-left">
-                    <span class="icon">🚪</span>
-                    <span>Logout</span>
-                </div>
-
-                <span class="arrow">›</span>
-
-            </a>
-
-        </div>
-
-    </div>
-
-    <!-- ================= MENU UTAMA ================= -->
-
     <div class="container">
 
-        <div class="main-menu">
+        <!-- ================= TITLE ================= -->
 
-            <h2>
-                🔍 Deteksi Penyakit Daun Kentang
-            </h2>
+        <div class="title">
 
-            <p>
-                Unggah gambar daun kentang untuk mendeteksi penyakit
-                menggunakan metode CNN MobileNetV2.
-            </p>
+            <div class="title-icon">
+                🌿
+            </div>
+
+            <h1>
+                Deteksi Penyakit Tanaman Kentang
+            </h1>
+
+        </div>
+
+        <!-- ================= MENU ================= -->
+
+        <div class="menu">
+
+            <!-- BERANDA -->
+
+            <a href="{{ url_for('home') }}"
+               class="menu-item">
+
+                <div class="menu-left">
+
+                    <div class="menu-icon">
+                        🏠
+                    </div>
+
+                    <div class="menu-text">
+                        Beranda
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </a>
+
+            <!-- RIWAYAT -->
+
+            <a href="{{ url_for('history') }}"
+               class="menu-item">
+
+                <div class="menu-left">
+
+                    <div class="menu-icon">
+                        📋
+                    </div>
+
+                    <div class="menu-text">
+                        Riwayat
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </a>
+
+            <!-- PROFIL -->
+
+            <a href="{{ url_for('profil') }}"
+               class="menu-item">
+
+                <div class="menu-left">
+
+                    <div class="menu-icon">
+                        👤
+                    </div>
+
+                    <div class="menu-text">
+                        Profil
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </a>
+
+            <!-- LOGOUT -->
+
+            <a href="{{ url_for('logout') }}"
+               class="menu-item">
+
+                <div class="menu-left">
+
+                    <div class="menu-icon">
+                        🚪
+                    </div>
+
+                    <div class="menu-text">
+                        Logout
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
+
+            </a>
+
+            <!-- INFORMASI -->
 
             <a href="{{ url_for('detect') }}"
-               class="btn-main">
+               class="menu-item">
 
-               Mulai Deteksi
+                <div class="menu-left">
+
+                    <div class="menu-icon">
+                        ℹ️
+                    </div>
+
+                    <div class="menu-text">
+                        Informasi
+                    </div>
+
+                </div>
+
+                <div class="arrow">
+                    ›
+                </div>
 
             </a>
 
         </div>
-
-    </div>
-
-    <!-- ================= FOOTER ================= -->
-
-    <div class="footer">
-
-        © 2026 Sistem Deteksi Penyakit Tanaman Kentang
 
     </div>
 
