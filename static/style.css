@@ -1,135 +1,324 @@
-/* ================= BODY ================= */
-body {
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    margin: 0;
+/* ================= RESET ================= */
 
-    /* WARNA LATAR */
-    background-color: #3ece8a; /* light blue */
-
-    /* GAMBAR LATAR */
-    background-image: url("images/Bc.jpeg"); /* letakkan file di static/images */
-    
-    /* Atur posisi dan ukuran gambar */
-    background-repeat: no-repeat;
-    background-size: cover;      /* memenuhi layar */
-    background-position: center; /* tengah */
-    
-    /* Overlay semi-transparan (opsional) */
-    position: relative;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* Overlay dengan campuran warna agar gambar tidak terlalu terang */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(240, 248, 255, 0.5); /* semi transparan */
-    z-index: -1; /* di belakang konten */
+/* ================= BODY ================= */
+
+body{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height:100vh;
+    color:white;
+    overflow-x:hidden;
+    position:relative;
+}
+
+/* ================= BACKGROUND ================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+
+    background:
+    url("images/Bc.jpeg")
+    no-repeat center center/cover;
+
+    filter:
+    blur(8px)
+    brightness(0.45);
+
+    transform:scale(1.08);
+
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.18);
+    z-index:-1;
 }
 
 /* ================= NAVBAR ================= */
-.navbar {
-    background: #b47b12;
-    color: white;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+.navbar{
+
+    width:100%;
+    max-width:500px;
+
+    margin:auto;
+
+    padding:70px 20px 20px;
+
+    background:transparent;
+
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+
 }
 
-.navbar h1 {
-    margin: 0;
-    font-size: 22px;
+/* ================= TITLE ================= */
+
+.navbar h1{
+
+    display:flex;
+    align-items:center;
+
+    gap:16px;
+
+    font-size:28px;
+    line-height:1.4;
+    font-weight:700;
+
+    color:white;
+
+    margin-bottom:45px;
 }
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    font-size: 14px;
-    transition: 0.3s;
+/* ================= MENU ================= */
+
+.nav-links{
+
+    width:100%;
+
+    display:flex;
+    flex-direction:column;
 }
 
-.nav-links a:hover {
-    color: #1abc9c;
+/* ================= MENU ITEM ================= */
+
+.nav-links a{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    text-decoration:none;
+
+    color:white;
+
+    padding:28px 5px;
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.18);
+
+    font-size:24px;
+
+    font-weight:600;
+
+    transition:0.3s;
+}
+
+/* ================= ICON LEFT ================= */
+
+.nav-links a::before{
+
+    margin-right:18px;
+
+    font-size:34px;
+}
+
+/* ICON MENU */
+
+.nav-links a:nth-child(1)::before{
+    content:"🏠";
+}
+
+.nav-links a:nth-child(2)::before{
+    content:"📋";
+}
+
+.nav-links a:nth-child(3)::before{
+    content:"👤";
+}
+
+.nav-links a:nth-child(4)::before{
+    content:"🚪";
+}
+
+/* ================= ARROW RIGHT ================= */
+
+.nav-links a::after{
+
+    content:"›";
+
+    font-size:42px;
+
+    font-weight:300;
+
+    opacity:0.9;
+}
+
+/* ================= HOVER ================= */
+
+.nav-links a:hover{
+
+    background:
+    rgba(255,255,255,0.04);
 }
 
 /* ================= CONTAINER ================= */
-.container {
-    padding: 10px;
+
+.container{
+
+    width:100%;
+    max-width:500px;
+
+    margin:auto;
+
+    padding:0 20px 40px;
 }
 
-/* ================= CARD ================= */
-.card {
-    position: absolute;   /* buat bisa diposisikan bebas */
-    top: 70px;            /* jarak dari atas */
-    right: 20px;          /* jarak dari kanan */
-    
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    max-width: 300px;     /* diperkecil supaya tidak terlalu besar */
+/* ================= MAIN MENU ================= */
+
+.main-menu{
+
+    background:transparent;
+
+    box-shadow:none;
+
+    padding:0;
+
+    text-align:left;
+
+    margin-top:10px;
 }
 
-.card h2 {
-    margin-top: 0;
-    color: #2c2d2e;
-    font-size: 18px;
+/* ================= TITLE DETEKSI ================= */
+
+.main-menu h2{
+
+    color:white;
+
+    font-size:0px;
 }
 
-.weather-item {
-    margin: 8px 0;
-    font-size: 16px;
+/* ================= HIDE TEXT ================= */
+
+.main-menu p{
+    display:none;
 }
 
-.error {
-    color: red;
-    font-weight: bold;
-}
-/* Main menu tengah */
-.main-menu {
-    text-align: center;
-    background: #b4e6cf;
-    padding: 20px 5px;
-    border-radius: 12px;
-    box-shadow: 0 35px 35px rgba(0,0,0,0.15);
+/* ================= BUTTON ================= */
 
-    max-width: 700px;           /* lebar maksimal kotak */
-    margin: 50px auto;          /* otomatis rata tengah horizontal, 50px jarak atas/bawah */
-}
+.btn-main{
 
-.main-menu h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
+    width:100%;
 
-.main-menu p {
-    font-size: 16px;
-    margin-bottom: 30px;
-}
+    display:flex;
 
-.btn-main {
-    display: inline-block;
-    background-color: #098f10;
-    color: white;
-    padding: 15px 25px;
-    font-size: 18px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: 0.3s;
+    justify-content:space-between;
+
+    align-items:center;
+
+    text-decoration:none;
+
+    color:white;
+
+    background:transparent;
+
+    padding:28px 5px;
+
+    border-radius:0;
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.18);
+
+    font-size:24px;
+
+    font-weight:600;
+
+    transition:0.3s;
 }
 
-.btn-main:hover {
-    background-color: #d1ddd1;
+/* ICON INFORMASI */
+
+.btn-main::before{
+
+    content:"ℹ️";
+
+    margin-right:18px;
+
+    font-size:34px;
 }
+
+/* ARROW */
+
+.btn-main::after{
+
+    content:"›";
+
+    font-size:42px;
+
+    font-weight:300;
+}
+
+/* HOVER */
+
+.btn-main:hover{
+
+    background:
+    rgba(255,255,255,0.04);
+}
+
+/* ================= CARD HILANG ================= */
+
+.card{
+    display:none;
+}
+
 /* ================= FOOTER ================= */
-.footer {
-    text-align: center;
-    padding: 15px;
-    margin-top: 40px;
-    color: #111111;
-    font-size: 13px;
+
+.footer{
+
+    width:100%;
+
+    max-width:500px;
+
+    margin:auto;
+
+    text-align:center;
+
+    padding:30px 20px;
+
+    color:rgba(255,255,255,0.75);
+
+    font-size:13px;
+}
+
+/* ================= MOBILE ================= */
+
+@media screen and (max-width:768px){
+
+    .navbar{
+        padding:65px 18px 15px;
+    }
+
+    .navbar h1{
+        font-size:24px;
+    }
+
+    .nav-links a{
+        font-size:20px;
+        padding:24px 0;
+    }
+
+    .btn-main{
+        font-size:20px;
+        padding:24px 0;
+    }
+
 }
