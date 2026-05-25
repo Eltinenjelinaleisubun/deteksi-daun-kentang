@@ -8,36 +8,54 @@
 
 <style>
 
-/* ================= CONTAINER ================= */
+/* ===== BODY ===== */
+body{
+    background:#111;
+    font-family:Segoe UI, sans-serif;
+    color:white;
+    margin:0;
+}
 
+/* ===== TOP NAV ===== */
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+    background:#1c1c1c;
+}
+
+.home-btn{
+    background:#3498db;
+    color:white;
+    padding:10px 15px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.home-btn:hover{
+    background:#2980b9;
+}
+
+/* ===== UPLOAD SECTION ===== */
 .upload-section{
-    margin-top:30px;
+    margin:30px auto;
     padding:25px;
     background:rgba(255,255,255,0.08);
     border-radius:18px;
     text-align:center;
-    font-family:Segoe UI, sans-serif;
-    color:white;
+    width:90%;
+    max-width:500px;
 }
-
-/* ================= TITLE ================= */
-
-.upload-section h2{
-    margin-bottom:15px;
-    font-size:20px;
-}
-
-/* ================= BUTTON AREA ================= */
 
 .upload-buttons{
     display:flex;
     gap:15px;
     justify-content:center;
     flex-wrap:wrap;
-    margin-top:10px;
+    margin-top:15px;
 }
-
-/* ================= BUTTON STYLE ================= */
 
 .upload-btn{
     background:linear-gradient(135deg,#2ecc71,#27ae60);
@@ -46,38 +64,66 @@
     border-radius:12px;
     cursor:pointer;
     font-weight:bold;
-    transition:0.3s;
     min-width:180px;
-    display:inline-block;
     text-align:center;
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
-.upload-btn:hover{
-    transform:scale(1.05);
-    background:linear-gradient(135deg,#27ae60,#219150);
+/* ===== CAMERA MODAL ===== */
+.camera-box{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:black;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 }
 
-/* ================= NOTE ================= */
-
-.upload-note{
-    margin-top:12px;
-    font-size:13px;
-    opacity:0.8;
+video{
+    width:90%;
+    max-width:500px;
+    border-radius:10px;
 }
 
-body{
-    background:#111;
+.camera-controls{
+    margin-top:15px;
+    display:flex;
+    gap:10px;
+}
+
+.btn{
+    padding:10px 15px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.close-btn{
+    background:red;
+    color:white;
+}
+
+.capture-btn{
+    background:green;
+    color:white;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<!-- ================= UPLOAD SECTION ================= -->
+<!-- ===== TOP BAR ===== -->
+<div class="topbar">
+    <h3>Upload Gambar</h3>
+    <a href="/" class="home-btn">🏠 Beranda</a>
+</div>
 
+<!-- ===== UPLOAD ===== -->
 <div class="upload-section">
 
     <h2>📤 Upload Gambar Daun Kentang</h2>
@@ -86,30 +132,70 @@ body{
 
         <!-- GALERI -->
         <label class="upload-btn">
-            📁 Upload dari Galeri
-            <input type="file"
-                   name="image"
-                   accept="image/*"
-                   style="display:none;">
+            📁 Galeri
+            <input type="file" accept="image/*" style="display:none;">
         </label>
 
         <!-- KAMERA -->
-        <label class="upload-btn">
-            📷 Ambil dari Kamera
-            <input type="file"
-                   name="image"
-                   accept="image/*"
-                   capture="environment"
-                   style="display:none;">
-        </label>
+        <button class="upload-btn" onclick="openCamera()">
+            📷 Kamera
+        </button>
 
     </div>
 
-    <p class="upload-note">
-        Pilih galeri atau ambil foto langsung dari kamera.
-    </p>
+</div>
+
+<!-- ===== CAMERA MODAL ===== -->
+<div class="camera-box" id="cameraBox">
+
+    <video id="video" autoplay></video>
+
+    <div class="camera-controls">
+
+        <button class="btn capture-btn" onclick="capture()">
+            Ambil Foto
+        </button>
+
+        <button class="btn close-btn" onclick="closeCamera()">
+            Tutup Kamera
+        </button>
+
+    </div>
 
 </div>
+
+<script>
+
+let stream;
+
+async function openCamera(){
+    const video = document.getElementById("video");
+    const box = document.getElementById("cameraBox");
+
+    stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "environment" }
+    });
+
+    video.srcObject = stream;
+    box.style.display = "flex";
+}
+
+function closeCamera(){
+    const video = document.getElementById("video");
+
+    if(stream){
+        stream.getTracks().forEach(track => track.stop());
+    }
+
+    video.srcObject = null;
+    document.getElementById("cameraBox").style.display = "none";
+}
+
+function capture(){
+    alert("Fitur capture bisa disambungkan ke backend Flask nanti 👍");
+}
+
+</script>
 
 </body>
 </html>
