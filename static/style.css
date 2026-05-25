@@ -132,8 +132,6 @@ body::after{
     0 10px 30px rgba(0,0,0,0.22);
 }
 
-/* ================= DETECT TITLE ================= */
-
 .detect-title{
 
     font-size:24px;
@@ -142,8 +140,6 @@ body::after{
 
     margin-bottom:18px;
 }
-
-/* ================= BUTTON ================= */
 
 .detect-btn{
 
@@ -201,8 +197,6 @@ body::after{
     0 10px 30px rgba(0,0,0,0.22);
 }
 
-/* ================= MENU TITLE ================= */
-
 .menu-title{
 
     padding:22px;
@@ -215,16 +209,12 @@ body::after{
     1px solid rgba(255,255,255,0.08);
 }
 
-/* ================= MENU LINKS ================= */
-
 .menu-links{
 
     display:flex;
 
     flex-direction:column;
 }
-
-/* ================= MENU ITEM ================= */
 
 .menu-item{
 
@@ -258,8 +248,6 @@ body::after{
     padding-left:28px;
 }
 
-/* ================= MENU LEFT ================= */
-
 .menu-left{
 
     display:flex;
@@ -268,8 +256,6 @@ body::after{
 
     gap:18px;
 }
-
-/* ================= ICON ================= */
 
 .menu-icon{
 
@@ -290,8 +276,6 @@ body::after{
     font-size:24px;
 }
 
-/* ================= TEXT ================= */
-
 .menu-text{
 
     font-size:20px;
@@ -299,13 +283,64 @@ body::after{
     font-weight:600;
 }
 
-/* ================= ARROW ================= */
-
 .arrow{
 
     font-size:34px;
 
     opacity:0.7;
+}
+
+/* ================= INFORMASI ================= */
+
+.info-section{
+
+    margin-top:30px;
+}
+
+.info-title{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    margin-bottom:18px;
+}
+
+.info-card{
+
+    background:
+    rgba(255,255,255,0.08);
+
+    border:
+    1px solid rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:24px;
+
+    padding:22px;
+
+    margin-bottom:18px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.22);
+}
+
+.info-card h2{
+
+    margin-bottom:12px;
+
+    font-size:22px;
+}
+
+.info-card p{
+
+    line-height:1.8;
+
+    color:
+    rgba(255,255,255,0.86);
+
+    font-size:15px;
 }
 
 /* ================= FOOTER ================= */
