@@ -25,14 +25,20 @@
 
         <div class="header">
 
+            <div class="logo-circle">
+                🌿
+            </div>
+
             <h1>
-                🌿 Sistem Deteksi Penyakit Kentang
+                Sistem Deteksi Penyakit Kentang
             </h1>
 
             <p class="subtitle">
 
-                Sistem deteksi penyakit daun kentang
-                menggunakan CNN MobileNetV2.
+                Deteksi penyakit daun kentang
+                menggunakan metode CNN
+                MobileNetV2 secara cepat
+                dan akurat.
 
             </p>
 
@@ -42,9 +48,25 @@
 
         <div class="detect-card">
 
-            <h2 class="detect-title">
-                🔍 Mulai Deteksi
-            </h2>
+            <div class="detect-top">
+
+                <h2>
+                    🔍 Mulai Deteksi
+                </h2>
+
+                <span class="status">
+                    ONLINE
+                </span>
+
+            </div>
+
+            <p class="detect-desc">
+
+                Upload gambar daun kentang
+                untuk mengetahui kondisi
+                tanaman secara otomatis.
+
+            </p>
 
             <a href="{{ url_for('detect') }}"
                class="detect-btn">
@@ -76,8 +98,14 @@
                             👤
                         </div>
 
-                        <div class="menu-text">
-                            Profil
+                        <div>
+                            <div class="menu-text">
+                                Profil
+                            </div>
+
+                            <div class="menu-sub">
+                                Informasi akun pengguna
+                            </div>
                         </div>
 
                     </div>
@@ -99,8 +127,14 @@
                             📋
                         </div>
 
-                        <div class="menu-text">
-                            Riwayat
+                        <div>
+                            <div class="menu-text">
+                                Riwayat
+                            </div>
+
+                            <div class="menu-sub">
+                                Hasil deteksi sebelumnya
+                            </div>
                         </div>
 
                     </div>
@@ -122,8 +156,14 @@
                             🚪
                         </div>
 
-                        <div class="menu-text">
-                            Logout
+                        <div>
+                            <div class="menu-text">
+                                Logout
+                            </div>
+
+                            <div class="menu-sub">
+                                Keluar dari sistem
+                            </div>
                         </div>
 
                     </div>
@@ -156,13 +196,11 @@
 
                 <p>
 
-                    Early Blight adalah penyakit
-                    daun kentang yang disebabkan oleh
-                    jamur <strong>Alternaria solani</strong>.
-
-                    Penyakit ini menyebabkan bercak
-                    coklat berbentuk lingkaran
-                    pada daun.
+                    Penyakit jamur pada daun
+                    kentang yang menyebabkan
+                    bercak coklat berbentuk
+                    lingkaran dan daun mulai
+                    mengering.
 
                 </p>
 
@@ -178,12 +216,11 @@
 
                 <p>
 
-                    Late Blight merupakan penyakit
-                    serius akibat jamur
-                    <strong>Phytophthora infestans</strong>.
-
-                    Penyakit ini membuat daun
-                    cepat menghitam dan membusuk.
+                    Penyakit serius yang membuat
+                    daun cepat membusuk,
+                    berwarna hitam,
+                    dan menyebar saat
+                    cuaca lembap.
 
                 </p>
 
@@ -199,27 +236,9 @@
 
                 <p>
 
-                    Daun sehat memiliki warna hijau,
-                    segar, dan tidak memiliki
-                    bercak ataupun kerusakan.
-
-                </p>
-
-            </div>
-
-            <!-- BUKAN DAUN -->
-
-            <div class="info-card">
-
-                <h2>
-                    ❌ Bukan Daun Kentang
-                </h2>
-
-                <p>
-
-                    Sistem mendeteksi gambar yang
-                    diunggah bukan merupakan
-                    daun kentang.
+                    Daun sehat memiliki warna
+                    hijau segar tanpa bercak,
+                    lubang, ataupun kerusakan.
 
                 </p>
 

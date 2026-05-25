@@ -59,8 +59,8 @@ body::after{
     background:
     linear-gradient(
         to bottom,
-        rgba(0,0,0,0.15),
-        rgba(0,0,0,0.35)
+        rgba(0,0,0,0.2),
+        rgba(0,0,0,0.4)
     );
 
     z-index:-1;
@@ -72,19 +72,53 @@ body::after{
 
     width:100%;
 
-    max-width:520px;
+    max-width:550px;
 
     margin:auto;
 
-    padding:40px 16px 30px;
+    padding:35px 16px 30px;
 }
 
 /* ================= HEADER ================= */
 
 .header{
 
-    margin-bottom:28px;
+    text-align:center;
+
+    margin-bottom:30px;
 }
+
+/* ================= LOGO ================= */
+
+.logo-circle{
+
+    width:90px;
+    height:90px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:42px;
+
+    background:
+    rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(12px);
+
+    margin-bottom:20px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* ================= TITLE ================= */
 
 .header h1{
 
@@ -100,19 +134,23 @@ body::after{
     0 4px 20px rgba(0,0,0,0.35);
 }
 
+/* ================= SUBTITLE ================= */
+
 .subtitle{
 
     color:
     rgba(255,255,255,0.86);
 
-    line-height:1.7;
+    line-height:1.8;
 
     font-size:15px;
 }
 
-/* ================= DETECT CARD ================= */
+/* ================= CARD ================= */
 
-.detect-card{
+.detect-card,
+.menu-section,
+.info-card{
 
     background:
     rgba(255,255,255,0.08);
@@ -124,22 +162,67 @@ body::after{
 
     border-radius:26px;
 
-    padding:22px;
-
-    margin-top:25px;
-
     box-shadow:
     0 10px 30px rgba(0,0,0,0.22);
 }
 
-.detect-title{
+/* ================= DETECT CARD ================= */
+
+.detect-card{
+
+    padding:24px;
+
+    margin-bottom:28px;
+}
+
+/* ================= DETECT TOP ================= */
+
+.detect-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:14px;
+}
+
+.detect-top h2{
 
     font-size:24px;
+}
+
+/* ================= STATUS ================= */
+
+.status{
+
+    background:#38c172;
+
+    color:white;
+
+    padding:6px 14px;
+
+    border-radius:50px;
+
+    font-size:12px;
 
     font-weight:700;
-
-    margin-bottom:18px;
 }
+
+/* ================= DESC ================= */
+
+.detect-desc{
+
+    color:
+    rgba(255,255,255,0.85);
+
+    line-height:1.7;
+
+    margin-bottom:22px;
+}
+
+/* ================= BUTTON ================= */
 
 .detect-btn{
 
@@ -152,7 +235,7 @@ body::after{
     text-decoration:none;
 
     background:
-    rgba(255,255,255,0.1);
+    rgba(255,255,255,0.14);
 
     color:white;
 
@@ -170,7 +253,7 @@ body::after{
 .detect-btn:hover{
 
     background:
-    rgba(255,255,255,0.18);
+    rgba(255,255,255,0.22);
 
     transform:translateY(-3px);
 }
@@ -179,29 +262,16 @@ body::after{
 
 .menu-section{
 
-    margin-top:28px;
-
-    background:
-    rgba(255,255,255,0.08);
-
-    border:
-    1px solid rgba(255,255,255,0.12);
-
-    backdrop-filter:blur(12px);
-
-    border-radius:26px;
-
     overflow:hidden;
 
-    box-shadow:
-    0 10px 30px rgba(0,0,0,0.22);
+    margin-bottom:30px;
 }
 
 .menu-title{
 
     padding:22px;
 
-    font-size:18px;
+    font-size:20px;
 
     font-weight:700;
 
@@ -215,6 +285,8 @@ body::after{
 
     flex-direction:column;
 }
+
+/* ================= MENU ITEM ================= */
 
 .menu-item{
 
@@ -243,10 +315,12 @@ body::after{
 .menu-item:hover{
 
     background:
-    rgba(255,255,255,0.05);
+    rgba(255,255,255,0.06);
 
     padding-left:28px;
 }
+
+/* ================= MENU LEFT ================= */
 
 .menu-left{
 
@@ -257,10 +331,12 @@ body::after{
     gap:18px;
 }
 
+/* ================= ICON ================= */
+
 .menu-icon{
 
-    width:54px;
-    height:54px;
+    width:58px;
+    height:58px;
 
     display:flex;
 
@@ -271,17 +347,33 @@ body::after{
     border-radius:18px;
 
     background:
-    rgba(255,255,255,0.08);
+    rgba(255,255,255,0.1);
 
-    font-size:24px;
+    font-size:26px;
 }
+
+/* ================= MENU TEXT ================= */
 
 .menu-text{
 
     font-size:20px;
 
-    font-weight:600;
+    font-weight:700;
 }
+
+/* ================= MENU SUB ================= */
+
+.menu-sub{
+
+    margin-top:4px;
+
+    color:
+    rgba(255,255,255,0.7);
+
+    font-size:13px;
+}
+
+/* ================= ARROW ================= */
 
 .arrow{
 
@@ -290,16 +382,16 @@ body::after{
     opacity:0.7;
 }
 
-/* ================= INFORMASI ================= */
+/* ================= INFO ================= */
 
 .info-section{
 
-    margin-top:30px;
+    margin-top:10px;
 }
 
 .info-title{
 
-    font-size:22px;
+    font-size:24px;
 
     font-weight:700;
 
@@ -308,22 +400,9 @@ body::after{
 
 .info-card{
 
-    background:
-    rgba(255,255,255,0.08);
-
-    border:
-    1px solid rgba(255,255,255,0.12);
-
-    backdrop-filter:blur(12px);
-
-    border-radius:24px;
-
     padding:22px;
 
     margin-bottom:18px;
-
-    box-shadow:
-    0 10px 30px rgba(0,0,0,0.22);
 }
 
 .info-card h2{
@@ -349,7 +428,7 @@ body::after{
 
     text-align:center;
 
-    padding:25px 10px;
+    padding:30px 10px;
 
     font-size:13px;
 
@@ -370,8 +449,12 @@ body::after{
     }
 
     .menu-icon{
-        width:48px;
-        height:48px;
+        width:52px;
+        height:52px;
+        font-size:24px;
+    }
+
+    .detect-top h2{
         font-size:22px;
     }
 
