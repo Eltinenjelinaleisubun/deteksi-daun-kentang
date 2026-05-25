@@ -6,11 +6,13 @@
     box-sizing:border-box;
 }
 
-/* ================= BODY ================= */
+/* ================= HTML ================= */
 
 html{
     scroll-behavior:smooth;
 }
+
+/* ================= BODY ================= */
 
 body{
 
@@ -18,13 +20,15 @@ body{
 
     min-height:100vh;
 
+    overflow-x:hidden;
+
     color:white;
 
-    overflow-x:hidden;
+    background:#000;
 
     position:relative;
 
-    background:#000;
+    z-index:0;
 }
 
 /* ================= BACKGROUND ================= */
@@ -35,7 +39,11 @@ body::before{
 
     position:fixed;
 
-    inset:0;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
 
     background:
     url("/static/images/Bc.jpeg")
@@ -72,6 +80,10 @@ body::after{
 
 .container{
 
+    position:relative;
+
+    z-index:1;
+
     width:100%;
 
     max-width:560px;
@@ -107,19 +119,18 @@ body::after{
 
     justify-content:center;
 
-    font-size:45px;
+    font-size:44px;
 
     background:
     rgba(255,255,255,0.12);
 
     border:
-    1px solid rgba(255,255,255,0.15);
+    1px solid rgba(255,255,255,0.14);
 
     backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
 
     box-shadow:
-    0 12px 35px rgba(0,0,0,0.35);
+    0 10px 30px rgba(0,0,0,0.35);
 }
 
 /* ================= TITLE ================= */
@@ -147,7 +158,7 @@ body::after{
     rgba(255,255,255,0.88);
 }
 
-/* ================= GLASS ================= */
+/* ================= CARD STYLE ================= */
 
 .detect-card,
 .menu-section,
@@ -160,7 +171,6 @@ body::after{
     1px solid rgba(255,255,255,0.12);
 
     backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
 
     box-shadow:
     0 10px 35px rgba(0,0,0,0.25);
@@ -172,7 +182,7 @@ body::after{
 
     padding:26px;
 
-    border-radius:30px;
+    border-radius:28px;
 
     margin-bottom:30px;
 }
@@ -206,9 +216,7 @@ body::after{
         #2bbd57
     );
 
-    color:white;
-
-    padding:7px 15px;
+    padding:7px 14px;
 
     border-radius:50px;
 
@@ -217,10 +225,10 @@ body::after{
     font-weight:700;
 
     box-shadow:
-    0 0 15px rgba(71,215,100,0.5);
+    0 0 15px rgba(71,215,100,0.45);
 }
 
-/* ================= DESC ================= */
+/* ================= DESCRIPTION ================= */
 
 .detect-desc{
 
@@ -229,7 +237,7 @@ body::after{
     color:
     rgba(255,255,255,0.84);
 
-    margin-bottom:24px;
+    margin-bottom:22px;
 }
 
 /* ================= BUTTON ================= */
@@ -260,25 +268,21 @@ body::after{
     );
 
     transition:0.3s;
-
-    box-shadow:
-    0 8px 20px rgba(0,0,0,0.25);
 }
 
 .detect-btn:hover{
 
     transform:
-    translateY(-4px)
-    scale(1.01);
+    translateY(-4px);
 }
 
 /* ================= MENU ================= */
 
 .menu-section{
 
-    border-radius:30px;
-
     overflow:hidden;
+
+    border-radius:28px;
 
     margin-bottom:32px;
 }
@@ -350,7 +354,7 @@ body::after{
     gap:18px;
 }
 
-/* ================= ICON ================= */
+/* ================= MENU ICON ================= */
 
 .menu-icon{
 
@@ -384,10 +388,10 @@ body::after{
 
     margin-top:4px;
 
+    font-size:13px;
+
     color:
     rgba(255,255,255,0.72);
-
-    font-size:13px;
 }
 
 /* ================= ARROW ================= */
@@ -403,7 +407,7 @@ body::after{
 
 .info-section{
 
-    margin-top:5px;
+    margin-top:8px;
 }
 
 .section-title{
