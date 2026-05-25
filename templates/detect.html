@@ -2,202 +2,426 @@
 <html lang="id">
 
 <head>
+
 <meta charset="UTF-8">
+
+<!-- RESPONSIVE MOBILE -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deteksi Kentang</title>
+
+<title>Deteksi Penyakit Kentang</title>
 
 <style>
 
-body{
-    margin:0;
-    font-family:Segoe UI, sans-serif;
-    background:#0b0f0c;
-    color:white;
-}
+    *{
+        box-sizing:border-box;
+        margin:0;
+        padding:0;
+    }
 
-.header{
-    text-align:center;
-    padding:20px;
-}
+    body{
+        font-family:'Segoe UI', Tahoma, sans-serif;
+        min-height:100vh;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        position:relative;
+        background:#b1d1ae;
+        padding:20px;
+    }
 
-.header h1{
-    color:#2ecc71;
-}
+    /* ================= BACKGROUND ================= */
 
-.card{
-    width:90%;
-    max-width:500px;
-    margin:20px auto;
-    background:rgba(255,255,255,0.06);
-    padding:20px;
-    border-radius:18px;
-    text-align:center;
-}
+    .background{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background-image:url("{{ url_for('static', filename='images/Bc.jpeg') }}");
+        background-size:cover;
+        background-position:center;
+        filter:blur(10px) brightness(0.6);
+        z-index:-1;
+    }
 
-.btn{
-    padding:12px 18px;
-    margin:8px;
-    border:none;
-    border-radius:12px;
-    font-weight:bold;
-    cursor:pointer;
-}
+    /* ================= HEADER ================= */
 
-.green{
-    background:#2ecc71;
-    color:white;
-}
+    header{
+        width:100%;
+        max-width:900px;
+        margin-top:20px;
+        padding:15px 20px;
+        background:#b47b12;
+        color:white;
+        font-size:1.5em;
+        font-weight:bold;
+        border-radius:15px;
+        text-align:center;
+        box-shadow:0 4px 15px rgba(0,0,0,0.3);
+    }
 
-.red{
-    background:#e74c3c;
-    color:white;
-}
+    /* ================= BUTTON BERANDA ================= */
 
-img{
-    width:100%;
-    max-width:320px;
-    margin-top:15px;
-    border-radius:15px;
-    display:none;
-}
+    .home-top{
+        position:fixed;
+        top:20px;
+        right:20px;
+        background:#4CAF50;
+        color:white;
+        padding:10px 18px;
+        border-radius:10px;
+        text-decoration:none;
+        font-size:0.9em;
+        font-weight:bold;
+        box-shadow:0 4px 10px rgba(0,0,0,0.3);
+        z-index:999;
+        transition:0.3s;
+    }
 
-input[type=file]{
-    display:none;
-}
+    .home-top:hover{
+        background:#388E3C;
+    }
 
-.camera{
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:black;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-}
+    /* ================= CONTAINER ================= */
 
-video{
-    width:90%;
-    max-width:500px;
-    border-radius:10px;
-}
+    .upload-container{
+        margin-top:30px;
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+        background:rgba(180,230,207,0.95);
+        padding:25px;
+        border-radius:18px;
+        max-width:450px;
+        width:100%;
+        box-shadow:0 8px 25px rgba(0,0,0,0.25);
+        backdrop-filter:blur(3px);
+    }
+
+    /* ================= BUTTON ================= */
+
+    .upload-btn{
+        background:white;
+        padding:14px;
+        border-radius:12px;
+        text-align:center;
+        cursor:pointer;
+        font-size:1em;
+        font-weight:bold;
+        transition:0.3s;
+    }
+
+    .upload-btn:hover{
+        background:#f0f0f0;
+    }
+
+    input[type="file"]{
+        display:none;
+    }
+
+    /* ================= VIDEO ================= */
+
+    video{
+        width:100%;
+        border-radius:15px;
+        background:black;
+    }
+
+    /* ================= CAMERA BUTTON ================= */
+
+    .camera-btn{
+        background:#ff9800;
+        color:white;
+        padding:12px;
+        border:none;
+        border-radius:12px;
+        cursor:pointer;
+        font-size:1em;
+        font-weight:bold;
+        transition:0.3s;
+    }
+
+    .camera-btn:hover{
+        background:#e68900;
+    }
+
+    /* ================= PREVIEW ================= */
+
+    .preview{
+        width:100%;
+        min-height:220px;
+        border:2px dashed white;
+        border-radius:15px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:rgba(0,0,0,0.15);
+        color:white;
+        font-size:1em;
+        overflow:hidden;
+    }
+
+    .preview img{
+        width:100%;
+        border-radius:15px;
+    }
+
+    /* ================= DETECT BUTTON ================= */
+
+    #deteksiBtn{
+        background:green;
+        color:white;
+        padding:14px;
+        border:none;
+        border-radius:12px;
+        cursor:pointer;
+        font-size:1em;
+        font-weight:bold;
+        transition:0.3s;
+    }
+
+    #deteksiBtn:hover{
+        background:#006400;
+    }
+
+    /* ================= RESPONSIVE MOBILE ================= */
+
+    @media screen and (max-width:768px){
+
+        body{
+            padding:15px;
+        }
+
+        header{
+            font-size:1.2em;
+            padding:14px;
+            margin-top:70px;
+        }
+
+        .home-top{
+            top:15px;
+            right:15px;
+            padding:8px 14px;
+            font-size:0.8em;
+        }
+
+        .upload-container{
+            padding:18px;
+            gap:12px;
+        }
+
+        .upload-btn,
+        .camera-btn,
+        #deteksiBtn{
+            width:100%;
+            font-size:15px;
+            padding:12px;
+        }
+
+        .preview{
+            min-height:180px;
+            font-size:14px;
+        }
+
+    }
 
 </style>
+
 </head>
 
 <body>
 
-<div class="header">
-    <h1>🌿 Deteksi Penyakit Kentang</h1>
-</div>
+<div class="background"></div>
 
-<div class="card">
+<!-- ================= HEADER ================= -->
 
-    <h3>Pilih Gambar</h3>
+<header>
+    🌿 Patogen Kentang Detector
+</header>
 
-    <!-- GALERI -->
-    <label class="btn green">
-        📁 Galeri
-        <input type="file" id="fileInput" accept="image/*">
+<!-- ================= BUTTON BERANDA ================= -->
+
+<a href="{{ url_for('home') }}" class="home-top">
+    🏠 Beranda
+</a>
+
+<!-- ================= CONTAINER ================= -->
+
+<div class="upload-container">
+
+    <!-- UPLOAD GALERI -->
+
+    <label class="upload-btn">
+
+        📁 Unggah dari Galeri
+
+        <input
+            type="file"
+            id="galleryInput"
+            accept="image/*"
+        >
+
     </label>
 
-    <!-- KAMERA -->
-    <button class="btn green" onclick="openCamera()">
-        📷 Kamera
+    <!-- VIDEO CAMERA -->
+
+    <video
+        id="video"
+        autoplay
+        playsinline>
+    </video>
+
+    <!-- CAMERA BUTTON -->
+
+    <button
+        type="button"
+        class="camera-btn"
+        id="captureBtn">
+
+        📸 Jepret Kamera
+
     </button>
 
-    <img id="preview">
+    <canvas id="canvas" style="display:none;"></canvas>
 
-    <form action="/predict" method="POST" enctype="multipart/form-data">
-        <input type="file" name="image" id="hiddenInput">
-        <button type="submit" class="btn green" id="detectBtn" style="display:none;">
-            🔍 Deteksi
-        </button>
+    <!-- PREVIEW -->
+
+    <div class="preview" id="preview">
+        Preview Gambar
+    </div>
+
+    <!-- FORM -->
+
+    <form
+        id="deteksiForm"
+        method="POST"
+        enctype="multipart/form-data">
     </form>
 
-</div>
+    <!-- DETECT BUTTON -->
 
-<!-- CAMERA -->
-<div class="camera" id="cameraBox">
+    <button
+        id="deteksiBtn"
+        type="submit"
+        form="deteksiForm">
 
-    <video id="video" autoplay></video>
+        🔍 Deteksi
 
-    <div>
-        <button class="btn green" onclick="capture()">Ambil</button>
-        <button class="btn red" onclick="closeCamera()">Tutup</button>
-    </div>
+    </button>
 
 </div>
 
 <script>
 
-let stream;
-
-const fileInput = document.getElementById("fileInput");
+const galleryInput = document.getElementById("galleryInput");
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
 const preview = document.getElementById("preview");
-const hiddenInput = document.getElementById("hiddenInput");
-const detectBtn = document.getElementById("detectBtn");
+const form = document.getElementById("deteksiForm");
 
-/* GALERI */
-fileInput.onchange = function(){
+
+// ================= GALERI =================
+
+galleryInput.addEventListener("change", function(){
+
     const file = this.files[0];
 
-    preview.src = URL.createObjectURL(file);
-    preview.style.display = "block";
+    if(!file) return;
 
-    hiddenInput.files = this.files;
-    detectBtn.style.display = "inline-block";
-}
+    showPreview(file);
 
-/* CAMERA */
-async function openCamera(){
+    setFormFile(file);
 
-    const video = document.getElementById("video");
-    document.getElementById("cameraBox").style.display = "flex";
+});
 
-    stream = await navigator.mediaDevices.getUserMedia({
-        video:{facingMode:"environment"}
-    });
+
+// ================= CAMERA =================
+
+navigator.mediaDevices.getUserMedia({
+
+    video:{
+        facingMode:"environment"
+    }
+
+})
+
+.then(stream => {
 
     video.srcObject = stream;
-}
 
-function closeCamera(){
-    if(stream){
-        stream.getTracks().forEach(t => t.stop());
-    }
-    document.getElementById("cameraBox").style.display = "none";
-}
+})
 
-function capture(){
+.catch(err => {
 
-    const video = document.getElementById("video");
+    alert("Kamera tidak bisa dibuka: " + err);
 
-    const canvas = document.createElement("canvas");
+});
+
+
+// ================= JEPRET =================
+
+document.getElementById("captureBtn")
+.addEventListener("click", function(){
+
+    const ctx = canvas.getContext("2d");
+
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
 
-    canvas.getContext("2d").drawImage(video,0,0);
+    ctx.drawImage(video, 0, 0);
 
     canvas.toBlob(blob => {
 
-        const file = new File([blob],"camera.jpg",{type:"image/jpeg"});
+        const file = new File(
+            [blob],
+            "camera.jpg",
+            { type:"image/jpeg" }
+        );
 
-        let dt = new DataTransfer();
-        dt.items.add(file);
+        showPreview(file);
 
-        hiddenInput.files = dt.files;
+        setFormFile(file);
 
-        preview.src = URL.createObjectURL(file);
-        preview.style.display = "block";
+    }, "image/jpeg");
 
-        detectBtn.style.display = "inline-block";
+});
 
-        closeCamera();
 
-    });
+// ================= PREVIEW =================
+
+function showPreview(file){
+
+    const reader = new FileReader();
+
+    reader.onload = e => {
+
+        preview.innerHTML =
+        <img src="${e.target.result}">;
+
+    };
+
+    reader.readAsDataURL(file);
+
+}
+
+
+// ================= FORM FILE =================
+
+function setFormFile(file){
+
+    form.innerHTML = "";
+
+    const dt = new DataTransfer();
+
+    dt.items.add(file);
+
+    const input = document.createElement("input");
+
+    input.type = "file";
+    input.name = "image";
+    input.files = dt.files;
+
+    form.appendChild(input);
 
 }
 

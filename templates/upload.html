@@ -2,63 +2,340 @@
 <html lang="id">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Upload</title>
 
-<style>
+    <meta charset="UTF-8">
 
-body{
-    margin:0;
-    font-family:Segoe UI;
-    background:#0b0f0c;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-}
+    <!-- RESPONSIVE MOBILE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.box{
-    text-align:center;
-    background:rgba(255,255,255,0.08);
-    padding:25px;
-    border-radius:15px;
-}
+    <title>Hasil Deteksi</title>
 
-input{
-    margin:10px;
-}
+    <!-- BOOTSTRAP -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
 
-.btn{
-    padding:10px 15px;
-    background:#2ecc71;
-    border:none;
-    border-radius:10px;
-    color:white;
-    font-weight:bold;
-}
+    <style>
 
-</style>
+        /* ================= BODY ================= */
+
+        *{
+            box-sizing:border-box;
+        }
+
+        body {
+
+            margin:0;
+            padding:20px;
+
+            min-height:100vh;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+            position:relative;
+
+            overflow-x:hidden;
+
+            background:#000;
+        }
+
+        /* ================= BACKGROUND ================= */
+
+        body::before{
+
+            content:"";
+
+            position:fixed;
+
+            top:0;
+            left:0;
+
+            width:100%;
+            height:100%;
+
+            background:
+            linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+            url('/static/images/Bc.jpeg')
+            no-repeat center/cover;
+
+            filter:blur(10px);
+
+            z-index:-2;
+        }
+
+        body::after{
+
+            content:"";
+
+            position:fixed;
+
+            top:0;
+            left:0;
+
+            width:100%;
+            height:100%;
+
+            background:rgba(0,0,0,0.2);
+
+            z-index:-1;
+        }
+
+        /* ================= CARD ================= */
+
+        .container-upload {
+
+            width:100%;
+            max-width:600px;
+
+            background:rgba(255,255,255,0.93);
+
+            padding:35px 30px;
+
+            border-radius:20px;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.35);
+
+            backdrop-filter:blur(4px);
+
+            text-align:center;
+
+            animation:fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+
+            from{
+                opacity:0;
+                transform:translateY(20px);
+            }
+
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        /* ================= TITLE ================= */
+
+        h3{
+
+            color:#2e7d32;
+
+            margin-bottom:25px;
+
+            font-size:32px;
+
+            font-weight:bold;
+        }
+
+        /* ================= RESULT ================= */
+
+        .status-text{
+
+            font-size:20px;
+
+            margin-bottom:10px;
+
+            color:#333;
+        }
+
+        .accuracy-text{
+
+            font-size:18px;
+
+            color:#555;
+
+            margin-bottom:20px;
+        }
+
+        /* ================= IMAGE ================= */
+
+        img {
+
+            width:100%;
+
+            max-width:350px;
+
+            border-radius:15px;
+
+            margin-top:15px;
+
+            border:3px solid #2e7d32;
+
+            box-shadow:0 5px 15px rgba(0,0,0,0.25);
+
+            transition:0.3s;
+        }
+
+        img:hover{
+
+            transform:scale(1.02);
+        }
+
+        /* ================= BUTTON ================= */
+
+        .btn-green {
+
+            background-color:#2e7d32;
+
+            color:white;
+
+            border:none;
+
+            padding:12px 22px;
+
+            border-radius:12px;
+
+            font-weight:bold;
+
+            transition:0.3s;
+        }
+
+        .btn-green:hover {
+
+            background-color:#27632a;
+
+            color:white;
+
+            transform:translateY(-2px);
+        }
+
+        /* ================= ERROR ================= */
+
+        .error-message {
+
+            color:#b71c1c;
+
+            font-weight:bold;
+
+            font-size:1.2rem;
+
+            margin-top:15px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media screen and (max-width:768px){
+
+            body{
+                padding:15px;
+            }
+
+            .container-upload{
+
+                padding:25px 18px;
+            }
+
+            h3{
+
+                font-size:26px;
+            }
+
+            .status-text{
+
+                font-size:18px;
+            }
+
+            .accuracy-text{
+
+                font-size:16px;
+            }
+
+            .btn-green{
+
+                width:100%;
+            }
+
+        }
+
+        @media screen and (max-width:480px){
+
+            h3{
+
+                font-size:22px;
+            }
+
+            .status-text{
+
+                font-size:16px;
+            }
+
+            .accuracy-text{
+
+                font-size:15px;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 <body>
 
-<div class="box">
+    <!-- ================= CARD ================= -->
 
-    <h2>Upload Gambar</h2>
+    <div class="container-upload">
 
-    <form action="/predict" method="POST" enctype="multipart/form-data">
+        <h3>
+            🌿 Hasil Deteksi
+        </h3>
 
-        <input type="file" name="image" accept="image/*">
+        {% if label is defined %}
 
-        <br>
+            {% if label == 'error' %}
 
-        <button class="btn">Deteksi</button>
+                <p class="error-message">
+                    ❌ Error: Gambar bukan daun kentang!
+                </p>
 
-    </form>
+            {% else %}
 
-</div>
+                <p class="status-text">
+                    <strong>Status:</strong>
+                    {{ label | capitalize }}
+                </p>
+
+                <p class="accuracy-text">
+                    <strong>Akurasi:</strong>
+                    {{ conf or '-' }}%
+                </p>
+
+                {% if filename %}
+
+                    <img
+                        src="{{ url_for('static', filename='uploads/' + filename) }}"
+                        alt="Gambar Deteksi"
+                    />
+
+                {% endif %}
+
+            {% endif %}
+
+        {% else %}
+
+            <p class="status-text">
+                Belum ada gambar yang diproses.
+            </p>
+
+        {% endif %}
+
+        <!-- BUTTON -->
+
+        <a
+            href="{{ url_for('home') }}"
+            class="btn btn-green mt-4"
+        >
+            ← Kembali ke Beranda
+        </a>
+
+    </div>
 
 </body>
+
 </html>
