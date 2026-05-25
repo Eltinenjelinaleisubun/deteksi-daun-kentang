@@ -8,185 +8,12 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Deteksi Penyakit Kentang</title>
+    <title>
+        Sistem Deteksi Penyakit Kentang
+    </title>
 
-    <style>
-
-        /* ================= RESET ================= */
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-        /* ================= BODY ================= */
-
-        body{
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height:100vh;
-            color:white;
-            overflow-x:hidden;
-            position:relative;
-        }
-
-        /* ================= BACKGROUND ================= */
-
-        body::before{
-            content:"";
-            position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-
-            background:
-            url('/static/images/Bc.jpeg')
-            no-repeat center center/cover;
-
-            filter:
-            blur(8px)
-            brightness(0.45);
-
-            transform:scale(1.08);
-
-            z-index:-2;
-        }
-
-        body::after{
-            content:"";
-            position:fixed;
-            inset:0;
-            background:
-            rgba(0,0,0,0.18);
-            z-index:-1;
-        }
-
-        /* ================= CONTAINER ================= */
-
-        .container{
-            width:100%;
-            max-width:500px;
-            margin:auto;
-            padding:70px 20px 40px;
-        }
-
-        /* ================= TITLE ================= */
-
-        .title{
-            display:flex;
-            align-items:center;
-            gap:16px;
-
-            margin-bottom:45px;
-        }
-
-        .title-icon{
-            font-size:40px;
-        }
-
-        .title h1{
-            font-size:28px;
-            line-height:1.4;
-            font-weight:700;
-        }
-
-        /* ================= MENU ================= */
-
-        .menu{
-            width:100%;
-        }
-
-        .menu-item{
-            width:100%;
-
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-
-            text-decoration:none;
-            color:white;
-
-            padding:28px 5px;
-
-            border-bottom:
-            1px solid rgba(255,255,255,0.18);
-
-            transition:0.3s;
-        }
-
-        .menu-item:hover{
-            background:
-            rgba(255,255,255,0.04);
-        }
-
-        /* ================= LEFT ================= */
-
-        .menu-left{
-            display:flex;
-            align-items:center;
-            gap:20px;
-        }
-
-        .menu-icon{
-            font-size:38px;
-            width:42px;
-            text-align:center;
-        }
-
-        .menu-text{
-            font-size:24px;
-            font-weight:600;
-        }
-
-        /* ================= RIGHT ARROW ================= */
-
-        .arrow{
-            font-size:46px;
-            font-weight:300;
-            opacity:0.9;
-        }
-
-        /* ================= MOBILE ================= */
-
-        @media screen and (max-width:768px){
-
-            .container{
-                padding:
-                65px 18px 30px;
-            }
-
-            .title{
-                margin-bottom:40px;
-            }
-
-            .title h1{
-                font-size:24px;
-            }
-
-            .title-icon{
-                font-size:34px;
-            }
-
-            .menu-item{
-                padding:24px 0;
-            }
-
-            .menu-icon{
-                font-size:32px;
-            }
-
-            .menu-text{
-                font-size:20px;
-            }
-
-            .arrow{
-                font-size:38px;
-            }
-
-        }
-
-    </style>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
@@ -194,142 +21,253 @@
 
     <div class="container">
 
-        <!-- ================= TITLE ================= -->
+        <!-- ================= HEADER ================= -->
 
-        <div class="title">
-
-            <div class="title-icon">
-                🌿
-            </div>
+        <div class="header">
 
             <h1>
-                Deteksi Penyakit Tanaman Kentang
+                🌿 Sistem Deteksi Penyakit Kentang
             </h1>
+
+            <p class="subtitle">
+
+                Sistem cerdas berbasis CNN MobileNetV2
+                untuk mendeteksi penyakit daun kentang
+                secara otomatis dan akurat.
+
+            </p>
+
+        </div>
+
+        <!-- ================= AI CARD ================= -->
+
+        <div class="ai-card">
+
+            <div class="ai-top">
+
+                <div>
+
+                    <h2>
+                        🤖 Artificial Intelligence
+                    </h2>
+
+                    <p>
+                        Deteksi penyakit tanaman berbasis CNN
+                    </p>
+
+                </div>
+
+                <div class="ai-badge">
+                    ONLINE
+                </div>
+
+            </div>
+
+            <a href="{{ url_for('detect') }}"
+               class="detect-btn">
+
+               🔍 Mulai Deteksi
+
+            </a>
 
         </div>
 
         <!-- ================= MENU ================= -->
 
-        <div class="menu">
+        <div class="menu-section">
 
-            <!-- BERANDA -->
+            <div class="menu-title">
+                ⚙️ Menu Utama
+            </div>
 
-            <a href="{{ url_for('home') }}"
-               class="menu-item">
+            <div class="menu-links">
 
-                <div class="menu-left">
+                <!-- PROFIL -->
 
-                    <div class="menu-icon">
-                        🏠
+                <a href="{{ url_for('profil') }}"
+                   class="menu-item">
+
+                    <div class="menu-left">
+
+                        <div class="menu-icon">
+                            👤
+                        </div>
+
+                        <div class="menu-text">
+                            Profil
+                        </div>
+
                     </div>
 
-                    <div class="menu-text">
-                        Beranda
+                    <div class="arrow">
+                        ›
                     </div>
 
-                </div>
+                </a>
 
-                <div class="arrow">
-                    ›
-                </div>
+                <!-- RIWAYAT -->
 
-            </a>
+                <a href="{{ url_for('history') }}"
+                   class="menu-item">
 
-            <!-- RIWAYAT -->
+                    <div class="menu-left">
 
-            <a href="{{ url_for('history') }}"
-               class="menu-item">
+                        <div class="menu-icon">
+                            📋
+                        </div>
 
-                <div class="menu-left">
+                        <div class="menu-text">
+                            Riwayat
+                        </div>
 
-                    <div class="menu-icon">
-                        📋
                     </div>
 
-                    <div class="menu-text">
-                        Riwayat
+                    <div class="arrow">
+                        ›
                     </div>
 
-                </div>
+                </a>
 
-                <div class="arrow">
-                    ›
-                </div>
+                <!-- INFORMASI -->
 
-            </a>
+                <a href="#informasi"
+                   class="menu-item">
 
-            <!-- PROFIL -->
+                    <div class="menu-left">
 
-            <a href="{{ url_for('profil') }}"
-               class="menu-item">
+                        <div class="menu-icon">
+                            📚
+                        </div>
 
-                <div class="menu-left">
+                        <div class="menu-text">
+                            Informasi
+                        </div>
 
-                    <div class="menu-icon">
-                        👤
                     </div>
 
-                    <div class="menu-text">
-                        Profil
+                    <div class="arrow">
+                        ›
                     </div>
 
-                </div>
+                </a>
 
-                <div class="arrow">
-                    ›
-                </div>
+                <!-- LOGOUT -->
 
-            </a>
+                <a href="{{ url_for('logout') }}"
+                   class="menu-item">
 
-            <!-- LOGOUT -->
+                    <div class="menu-left">
 
-            <a href="{{ url_for('logout') }}"
-               class="menu-item">
+                        <div class="menu-icon">
+                            🚪
+                        </div>
 
-                <div class="menu-left">
+                        <div class="menu-text">
+                            Logout
+                        </div>
 
-                    <div class="menu-icon">
-                        🚪
                     </div>
 
-                    <div class="menu-text">
-                        Logout
+                    <div class="arrow">
+                        ›
                     </div>
 
-                </div>
+                </a>
 
-                <div class="arrow">
-                    ›
-                </div>
+            </div>
 
-            </a>
+        </div>
 
-            <!-- INFORMASI -->
+        <!-- ================= INFORMASI ================= -->
 
-            <a href="{{ url_for('detect') }}"
-               class="menu-item">
+        <div class="info-section"
+             id="informasi">
 
-                <div class="menu-left">
+            <div class="info-header">
 
-                    <div class="menu-icon">
-                        ℹ️
-                    </div>
+                📚 Informasi Penyakit
 
-                    <div class="menu-text">
-                        Informasi
-                    </div>
+            </div>
 
-                </div>
+            <!-- EARLY BLIGHT -->
 
-                <div class="arrow">
-                    ›
-                </div>
+            <div class="disease-card">
 
-            </a>
+                <h2>
+                    🍂 Early Blight
+                </h2>
+
+                <p>
+
+                    Early Blight adalah penyakit pada daun
+                    kentang yang disebabkan oleh jamur
+                    <strong>Alternaria solani</strong>.
+
+                    Penyakit ini menyebabkan munculnya
+                    bercak coklat berbentuk lingkaran
+                    pada daun dan dapat menurunkan
+                    hasil panen.
+
+                </p>
+
+            </div>
+
+            <!-- LATE BLIGHT -->
+
+            <div class="disease-card">
+
+                <h2>
+                    🌱 Late Blight
+                </h2>
+
+                <p>
+
+                    Late Blight merupakan penyakit serius
+                    yang disebabkan oleh
+                    <strong>Phytophthora infestans</strong>.
+
+                    Penyakit ini membuat daun cepat
+                    membusuk, berwarna hitam kecoklatan,
+                    dan menyebar sangat cepat saat
+                    cuaca lembap.
+
+                </p>
+
+            </div>
+
+            <!-- HEALTHY -->
+
+            <div class="disease-card">
+
+                <h2>
+                    ✅ Healthy Leaf
+                </h2>
+
+                <p>
+
+                    Daun sehat memiliki warna hijau segar,
+                    tidak terdapat bercak hitam,
+                    lubang, atau perubahan warna.
+
+                    Tanaman sehat menunjukkan pertumbuhan
+                    yang baik dan produktivitas tinggi.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ================= FOOTER ================= -->
+
+        <div class="footer">
+
+            © 2026 Sistem Deteksi Penyakit Tanaman Kentang
 
         </div>
 
     </div>
 
 </body>
+
 </html>
