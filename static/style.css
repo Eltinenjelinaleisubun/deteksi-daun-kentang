@@ -1,4 +1,3 @@
-
 /* ================= RESET ================= */
 
 *{
@@ -9,6 +8,10 @@
 
 /* ================= BODY ================= */
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
 
     font-family:'Segoe UI', Tahoma, sans-serif;
@@ -17,11 +20,11 @@ body{
 
     color:white;
 
-    background:#111;
-
     overflow-x:hidden;
 
     position:relative;
+
+    background:#000;
 }
 
 /* ================= BACKGROUND ================= */
@@ -32,19 +35,15 @@ body::before{
 
     position:fixed;
 
-    top:0;
-    left:0;
-
-    width:100%;
-    height:100%;
+    inset:0;
 
     background:
     url("/static/images/Bc.jpeg")
     no-repeat center center/cover;
 
     filter:
-    blur(5px)
-    brightness(0.45);
+    blur(7px)
+    brightness(0.4);
 
     transform:scale(1.08);
 
@@ -63,7 +62,7 @@ body::after{
     linear-gradient(
         to bottom,
         rgba(0,0,0,0.25),
-        rgba(0,0,0,0.45)
+        rgba(0,0,0,0.65)
     );
 
     z-index:-1;
@@ -75,11 +74,11 @@ body::after{
 
     width:100%;
 
-    max-width:550px;
+    max-width:560px;
 
     margin:auto;
 
-    padding:35px 16px 30px;
+    padding:30px 16px 40px;
 }
 
 /* ================= HEADER ================= */
@@ -88,17 +87,17 @@ body::after{
 
     text-align:center;
 
-    margin-bottom:30px;
+    margin-bottom:32px;
 }
 
 /* ================= LOGO ================= */
 
 .logo-circle{
 
-    width:90px;
-    height:90px;
+    width:100px;
+    height:100px;
 
-    margin:auto;
+    margin:auto auto 22px;
 
     border-radius:50%;
 
@@ -108,49 +107,47 @@ body::after{
 
     justify-content:center;
 
-    font-size:42px;
+    font-size:45px;
 
     background:
     rgba(255,255,255,0.12);
 
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
+    border:
+    1px solid rgba(255,255,255,0.15);
 
-    margin-bottom:20px;
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
 
     box-shadow:
-    0 10px 30px rgba(0,0,0,0.25);
+    0 12px 35px rgba(0,0,0,0.35);
 }
 
 /* ================= TITLE ================= */
 
 .header h1{
 
-    font-size:32px;
+    font-size:34px;
 
     line-height:1.3;
 
     font-weight:800;
 
-    margin-bottom:14px;
-
-    text-shadow:
-    0 4px 20px rgba(0,0,0,0.35);
+    margin-bottom:15px;
 }
 
 /* ================= SUBTITLE ================= */
 
 .subtitle{
 
-    color:
-    rgba(255,255,255,0.86);
-
-    line-height:1.8;
-
     font-size:15px;
+
+    line-height:1.9;
+
+    color:
+    rgba(255,255,255,0.88);
 }
 
-/* ================= CARD ================= */
+/* ================= GLASS ================= */
 
 .detect-card,
 .menu-section,
@@ -160,24 +157,24 @@ body::after{
     rgba(255,255,255,0.08);
 
     border:
-    1px solid rgba(255,255,255,0.15);
+    1px solid rgba(255,255,255,0.12);
 
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-
-    border-radius:26px;
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
 
     box-shadow:
-    0 10px 30px rgba(0,0,0,0.22);
+    0 10px 35px rgba(0,0,0,0.25);
 }
 
 /* ================= DETECT CARD ================= */
 
 .detect-card{
 
-    padding:24px;
+    padding:26px;
 
-    margin-bottom:28px;
+    border-radius:30px;
+
+    margin-bottom:30px;
 }
 
 /* ================= DETECT TOP ================= */
@@ -190,7 +187,7 @@ body::after{
 
     align-items:center;
 
-    margin-bottom:14px;
+    margin-bottom:15px;
 }
 
 .detect-top h2{
@@ -202,29 +199,37 @@ body::after{
 
 .status{
 
-    background:#38c172;
+    background:
+    linear-gradient(
+        135deg,
+        #47d764,
+        #2bbd57
+    );
 
     color:white;
 
-    padding:6px 14px;
+    padding:7px 15px;
 
     border-radius:50px;
 
     font-size:12px;
 
     font-weight:700;
+
+    box-shadow:
+    0 0 15px rgba(71,215,100,0.5);
 }
 
 /* ================= DESC ================= */
 
 .detect-desc{
 
+    line-height:1.8;
+
     color:
-    rgba(255,255,255,0.85);
+    rgba(255,255,255,0.84);
 
-    line-height:1.7;
-
-    margin-bottom:22px;
+    margin-bottom:24px;
 }
 
 /* ================= BUTTON ================= */
@@ -233,58 +238,64 @@ body::after{
 
     display:block;
 
-    width:100%;
-
     text-align:center;
 
     text-decoration:none;
 
-    background:
-    rgba(255,255,255,0.14);
-
     color:white;
-
-    padding:18px;
-
-    border-radius:18px;
 
     font-size:17px;
 
     font-weight:700;
 
-    transition:
-    background 0.3s,
-    transform 0.3s;
+    padding:18px;
+
+    border-radius:20px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #48bb78,
+        #2f855a
+    );
+
+    transition:0.3s;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.25);
 }
 
 .detect-btn:hover{
 
-    background:
-    rgba(255,255,255,0.22);
-
-    transform:translateY(-3px);
+    transform:
+    translateY(-4px)
+    scale(1.01);
 }
 
 /* ================= MENU ================= */
 
 .menu-section{
 
+    border-radius:30px;
+
     overflow:hidden;
 
-    margin-bottom:30px;
+    margin-bottom:32px;
 }
 
 .menu-title{
 
     padding:22px;
 
-    font-size:20px;
+    font-size:21px;
 
     font-weight:700;
 
     border-bottom:
     1px solid rgba(255,255,255,0.08);
 }
+
+/* ================= MENU LINKS ================= */
 
 .menu-links{
 
@@ -309,9 +320,7 @@ body::after{
 
     padding:22px;
 
-    transition:
-    background 0.3s,
-    transform 0.3s;
+    transition:0.3s;
 
     border-bottom:
     1px solid rgba(255,255,255,0.08);
@@ -327,7 +336,7 @@ body::after{
     background:
     rgba(255,255,255,0.06);
 
-    transform:translateX(6px);
+    transform:translateX(5px);
 }
 
 /* ================= MENU LEFT ================= */
@@ -348,18 +357,18 @@ body::after{
     width:58px;
     height:58px;
 
+    border-radius:18px;
+
     display:flex;
 
     align-items:center;
 
     justify-content:center;
 
-    border-radius:18px;
+    font-size:27px;
 
     background:
-    rgba(255,255,255,0.1);
-
-    font-size:26px;
+    rgba(255,255,255,0.12);
 }
 
 /* ================= MENU TEXT ================= */
@@ -371,14 +380,12 @@ body::after{
     font-weight:700;
 }
 
-/* ================= MENU SUB ================= */
-
 .menu-sub{
 
     margin-top:4px;
 
     color:
-    rgba(255,255,255,0.7);
+    rgba(255,255,255,0.72);
 
     font-size:13px;
 }
@@ -396,40 +403,80 @@ body::after{
 
 .info-section{
 
-    margin-top:10px;
+    margin-top:5px;
 }
 
-.info-title{
+.section-title{
 
     font-size:24px;
 
     font-weight:700;
 
-    margin-bottom:18px;
+    margin-bottom:20px;
 }
+
+/* ================= INFO CARD ================= */
 
 .info-card{
 
+    display:flex;
+
+    gap:18px;
+
     padding:22px;
 
+    border-radius:26px;
+
     margin-bottom:18px;
+
+    transition:0.3s;
 }
 
-.info-card h2{
+.info-card:hover{
 
-    margin-bottom:12px;
+    transform:translateY(-5px);
+}
+
+/* ================= INFO ICON ================= */
+
+.info-icon{
+
+    width:65px;
+    height:65px;
+
+    min-width:65px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:30px;
+
+    background:
+    rgba(255,255,255,0.12);
+}
+
+/* ================= INFO CONTENT ================= */
+
+.info-content h3{
 
     font-size:22px;
+
+    margin-bottom:10px;
 }
 
-.info-card p{
+.info-content p{
 
     line-height:1.8;
 
-    color:
-    rgba(255,255,255,0.86);
-
     font-size:15px;
+
+    color:
+    rgba(255,255,255,0.84);
 }
 
 /* ================= FOOTER ================= */
@@ -438,9 +485,7 @@ body::after{
 
     text-align:center;
 
-    margin-top:40px;
-
-    padding:30px 10px;
+    margin-top:38px;
 
     font-size:13px;
 
@@ -454,7 +499,7 @@ body::after{
 
     .container{
 
-        padding:25px 14px;
+        padding:24px 14px 35px;
     }
 
     .header h1{
@@ -465,6 +510,11 @@ body::after{
     .subtitle{
 
         font-size:14px;
+    }
+
+    .detect-top h2{
+
+        font-size:22px;
     }
 
     .menu-text{
@@ -480,12 +530,7 @@ body::after{
         font-size:24px;
     }
 
-    .detect-top h2{
-
-        font-size:22px;
-    }
-
-    .info-card h2{
+    .info-content h3{
 
         font-size:20px;
     }

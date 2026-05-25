@@ -35,16 +35,15 @@
 
             <p class="subtitle">
 
-                Deteksi penyakit daun kentang
-                menggunakan metode CNN
-                MobileNetV2 secara cepat
-                dan akurat.
+                Sistem cerdas berbasis CNN MobileNetV2
+                untuk mendeteksi penyakit daun kentang
+                secara cepat, modern, dan akurat.
 
             </p>
 
         </div>
 
-        <!-- ================= DETEKSI ================= -->
+        <!-- ================= DETECT CARD ================= -->
 
         <div class="detect-card">
 
@@ -62,9 +61,9 @@
 
             <p class="detect-desc">
 
-                Upload gambar daun kentang
-                untuk mengetahui kondisi
-                tanaman secara otomatis.
+                Upload gambar daun kentang dan sistem
+                akan menganalisis kondisi tanaman
+                menggunakan Artificial Intelligence.
 
             </p>
 
@@ -118,7 +117,7 @@
 
                 </a>
 
-                <!-- RIWAYAT -->
+                <!-- HISTORY -->
 
                 <a href="{{ url_for('history') }}"
                    class="menu-item">
@@ -137,6 +136,37 @@
 
                             <div class="menu-sub">
                                 Hasil deteksi sebelumnya
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="arrow">
+                        ›
+                    </div>
+
+                </a>
+
+                <!-- INFORMASI -->
+
+                <a href="#informasi"
+                   class="menu-item">
+
+                    <div class="menu-left">
+
+                        <div class="menu-icon">
+                            📚
+                        </div>
+
+                        <div>
+
+                            <div class="menu-text">
+                                Informasi
+                            </div>
+
+                            <div class="menu-sub">
+                                Pengetahuan penyakit daun
                             </div>
 
                         </div>
@@ -184,11 +214,12 @@
 
         </div>
 
-        <!-- ================= INFORMASI ================= -->
+        <!-- ================= INFO ================= -->
 
-        <div class="info-section">
+        <div class="info-section"
+             id="informasi">
 
-            <div class="info-title">
+            <div class="section-title">
                 📚 Informasi Penyakit
             </div>
 
@@ -196,19 +227,27 @@
 
             <div class="info-card">
 
-                <h2>
-                    🍂 Early Blight
-                </h2>
+                <div class="info-icon">
+                    🍂
+                </div>
 
-                <p>
+                <div class="info-content">
 
-                    Penyakit jamur pada daun
-                    kentang yang menyebabkan
-                    bercak coklat berbentuk
-                    lingkaran dan daun mulai
-                    mengering.
+                    <h3>
+                        Early Blight
+                    </h3>
 
-                </p>
+                    <p>
+
+                        Early Blight adalah penyakit
+                        jamur yang menyebabkan bercak
+                        coklat melingkar pada daun.
+                        Penyakit ini dapat membuat
+                        daun menguning dan mengering.
+
+                    </p>
+
+                </div>
 
             </div>
 
@@ -216,19 +255,26 @@
 
             <div class="info-card">
 
-                <h2>
-                    🌱 Late Blight
-                </h2>
+                <div class="info-icon">
+                    🌱
+                </div>
 
-                <p>
+                <div class="info-content">
 
-                    Penyakit serius yang membuat
-                    daun cepat membusuk,
-                    berwarna hitam,
-                    dan menyebar saat
-                    cuaca lembap.
+                    <h3>
+                        Late Blight
+                    </h3>
 
-                </p>
+                    <p>
+
+                        Late Blight merupakan penyakit
+                        berbahaya yang menyebar cepat
+                        saat cuaca lembap. Daun akan
+                        membusuk, menghitam, dan rusak.
+
+                    </p>
+
+                </div>
 
             </div>
 
@@ -236,17 +282,26 @@
 
             <div class="info-card">
 
-                <h2>
-                    ✅ Healthy Leaf
-                </h2>
+                <div class="info-icon">
+                    ✅
+                </div>
 
-                <p>
+                <div class="info-content">
 
-                    Daun sehat memiliki warna
-                    hijau segar tanpa bercak,
-                    lubang, ataupun kerusakan.
+                    <h3>
+                        Healthy Leaf
+                    </h3>
 
-                </p>
+                    <p>
+
+                        Daun kentang sehat memiliki
+                        warna hijau segar tanpa bercak,
+                        lubang, maupun perubahan warna
+                        pada permukaan daun.
+
+                    </p>
+
+                </div>
 
             </div>
 
