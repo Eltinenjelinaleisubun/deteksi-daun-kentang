@@ -31,42 +31,26 @@
 
             <p class="subtitle">
 
-                Sistem cerdas berbasis CNN MobileNetV2
-                untuk mendeteksi penyakit daun kentang
-                secara otomatis dan akurat.
+                Sistem deteksi penyakit daun kentang
+                berbasis CNN MobileNetV2 secara
+                otomatis dan akurat.
 
             </p>
 
         </div>
 
-        <!-- ================= AI CARD ================= -->
+        <!-- ================= DETEKSI ================= -->
 
-        <div class="ai-card">
+        <div class="detect-card">
 
-            <div class="ai-top">
-
-                <div>
-
-                    <h2>
-                        🤖 Artificial Intelligence
-                    </h2>
-
-                    <p>
-                        Deteksi penyakit tanaman berbasis CNN
-                    </p>
-
-                </div>
-
-                <div class="ai-badge">
-                    ONLINE
-                </div>
-
-            </div>
+            <h2 class="detect-title">
+                🔍 Mulai Deteksi
+            </h2>
 
             <a href="{{ url_for('detect') }}"
                class="detect-btn">
 
-               🔍 Mulai Deteksi
+               Mulai Sekarang
 
             </a>
 
@@ -128,29 +112,6 @@
 
                 </a>
 
-                <!-- INFORMASI -->
-
-                <a href="#informasi"
-                   class="menu-item">
-
-                    <div class="menu-left">
-
-                        <div class="menu-icon">
-                            📚
-                        </div>
-
-                        <div class="menu-text">
-                            Informasi
-                        </div>
-
-                    </div>
-
-                    <div class="arrow">
-                        ›
-                    </div>
-
-                </a>
-
                 <!-- LOGOUT -->
 
                 <a href="{{ url_for('logout') }}"
@@ -173,86 +134,6 @@
                     </div>
 
                 </a>
-
-            </div>
-
-        </div>
-
-        <!-- ================= INFORMASI ================= -->
-
-        <div class="info-section"
-             id="informasi">
-
-            <div class="info-header">
-
-                📚 Informasi Penyakit
-
-            </div>
-
-            <!-- EARLY BLIGHT -->
-
-            <div class="disease-card">
-
-                <h2>
-                    🍂 Early Blight
-                </h2>
-
-                <p>
-
-                    Early Blight adalah penyakit pada daun
-                    kentang yang disebabkan oleh jamur
-                    <strong>Alternaria solani</strong>.
-
-                    Penyakit ini menyebabkan munculnya
-                    bercak coklat berbentuk lingkaran
-                    pada daun dan dapat menurunkan
-                    hasil panen.
-
-                </p>
-
-            </div>
-
-            <!-- LATE BLIGHT -->
-
-            <div class="disease-card">
-
-                <h2>
-                    🌱 Late Blight
-                </h2>
-
-                <p>
-
-                    Late Blight merupakan penyakit serius
-                    yang disebabkan oleh
-                    <strong>Phytophthora infestans</strong>.
-
-                    Penyakit ini membuat daun cepat
-                    membusuk, berwarna hitam kecoklatan,
-                    dan menyebar sangat cepat saat
-                    cuaca lembap.
-
-                </p>
-
-            </div>
-
-            <!-- HEALTHY -->
-
-            <div class="disease-card">
-
-                <h2>
-                    ✅ Healthy Leaf
-                </h2>
-
-                <p>
-
-                    Daun sehat memiliki warna hijau segar,
-                    tidak terdapat bercak hitam,
-                    lubang, atau perubahan warna.
-
-                    Tanaman sehat menunjukkan pertumbuhan
-                    yang baik dan produktivitas tinggi.
-
-                </p>
 
             </div>
 

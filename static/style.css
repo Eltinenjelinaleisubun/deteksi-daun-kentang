@@ -110,9 +110,9 @@ body::after{
     font-size:15px;
 }
 
-/* ================= AI CARD ================= */
+/* ================= DETECT CARD ================= */
 
-.ai-card{
+.detect-card{
 
     background:
     rgba(255,255,255,0.08);
@@ -132,51 +132,15 @@ body::after{
     0 10px 30px rgba(0,0,0,0.22);
 }
 
-/* ================= AI TOP ================= */
+/* ================= DETECT TITLE ================= */
 
-.ai-top{
+.detect-title{
 
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-start;
-
-    gap:14px;
-}
-
-.ai-top h2{
-
-    font-size:22px;
-
-    margin-bottom:8px;
-}
-
-.ai-top p{
-
-    font-size:14px;
-
-    color:
-    rgba(255,255,255,0.8);
-
-    line-height:1.6;
-}
-
-/* ================= BADGE ================= */
-
-.ai-badge{
-
-    background:#36d66b;
-
-    color:black;
-
-    font-size:12px;
+    font-size:24px;
 
     font-weight:700;
 
-    padding:8px 14px;
-
-    border-radius:30px;
+    margin-bottom:18px;
 }
 
 /* ================= BUTTON ================= */
@@ -186,8 +150,6 @@ body::after{
     display:block;
 
     width:100%;
-
-    margin-top:22px;
 
     text-align:center;
 
@@ -344,63 +306,6 @@ body::after{
     font-size:34px;
 
     opacity:0.7;
-}
-
-/* ================= INFO SECTION ================= */
-
-.info-section{
-
-    margin-top:28px;
-}
-
-/* ================= INFO HEADER ================= */
-
-.info-header{
-
-    font-size:22px;
-
-    font-weight:700;
-
-    margin-bottom:18px;
-}
-
-/* ================= DISEASE CARD ================= */
-
-.disease-card{
-
-    background:
-    rgba(255,255,255,0.08);
-
-    border:
-    1px solid rgba(255,255,255,0.12);
-
-    backdrop-filter:blur(12px);
-
-    border-radius:24px;
-
-    padding:22px;
-
-    margin-bottom:18px;
-
-    box-shadow:
-    0 10px 30px rgba(0,0,0,0.22);
-}
-
-.disease-card h2{
-
-    margin-bottom:12px;
-
-    font-size:22px;
-}
-
-.disease-card p{
-
-    line-height:1.8;
-
-    color:
-    rgba(255,255,255,0.86);
-
-    font-size:15px;
 }
 
 /* ================= FOOTER ================= */
