@@ -1,3 +1,4 @@
+
 /* ================= RESET ================= */
 
 *{
@@ -15,6 +16,8 @@ body{
     min-height:100vh;
 
     color:white;
+
+    background:#111;
 
     overflow-x:hidden;
 
@@ -36,11 +39,11 @@ body::before{
     height:100%;
 
     background:
-    url("images/Bc.jpeg")
+    url("/static/images/Bc.jpeg")
     no-repeat center center/cover;
 
     filter:
-    blur(8px)
+    blur(5px)
     brightness(0.45);
 
     transform:scale(1.08);
@@ -59,8 +62,8 @@ body::after{
     background:
     linear-gradient(
         to bottom,
-        rgba(0,0,0,0.2),
-        rgba(0,0,0,0.4)
+        rgba(0,0,0,0.25),
+        rgba(0,0,0,0.45)
     );
 
     z-index:-1;
@@ -111,6 +114,7 @@ body::after{
     rgba(255,255,255,0.12);
 
     backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
 
     margin-bottom:20px;
 
@@ -156,9 +160,10 @@ body::after{
     rgba(255,255,255,0.08);
 
     border:
-    1px solid rgba(255,255,255,0.12);
+    1px solid rgba(255,255,255,0.15);
 
     backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
 
     border-radius:26px;
 
@@ -247,7 +252,9 @@ body::after{
 
     font-weight:700;
 
-    transition:0.3s;
+    transition:
+    background 0.3s,
+    transform 0.3s;
 }
 
 .detect-btn:hover{
@@ -302,13 +309,16 @@ body::after{
 
     padding:22px;
 
-    transition:0.3s;
+    transition:
+    background 0.3s,
+    transform 0.3s;
 
     border-bottom:
     1px solid rgba(255,255,255,0.08);
 }
 
 .menu-item:last-child{
+
     border-bottom:none;
 }
 
@@ -317,7 +327,7 @@ body::after{
     background:
     rgba(255,255,255,0.06);
 
-    padding-left:28px;
+    transform:translateX(6px);
 }
 
 /* ================= MENU LEFT ================= */
@@ -428,6 +438,8 @@ body::after{
 
     text-align:center;
 
+    margin-top:40px;
+
     padding:30px 10px;
 
     font-size:13px;
@@ -440,22 +452,42 @@ body::after{
 
 @media screen and (max-width:768px){
 
+    .container{
+
+        padding:25px 14px;
+    }
+
     .header h1{
+
         font-size:28px;
     }
 
+    .subtitle{
+
+        font-size:14px;
+    }
+
     .menu-text{
+
         font-size:18px;
     }
 
     .menu-icon{
+
         width:52px;
         height:52px;
+
         font-size:24px;
     }
 
     .detect-top h2{
+
         font-size:22px;
+    }
+
+    .info-card h2{
+
+        font-size:20px;
     }
 
 }
