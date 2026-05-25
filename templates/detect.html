@@ -4,72 +4,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Upload Gambar</title>
+<title>Deteksi Kentang</title>
 
 <style>
 
-/* ===== BODY ===== */
 body{
-    background:#111;
-    font-family:Segoe UI, sans-serif;
-    color:white;
     margin:0;
-}
-
-/* ===== TOP NAV ===== */
-.topbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 20px;
-    background:#1c1c1c;
-}
-
-.home-btn{
-    background:#3498db;
+    font-family:Segoe UI, sans-serif;
+    background:#0b0f0c;
     color:white;
-    padding:10px 15px;
-    border-radius:10px;
-    text-decoration:none;
-    font-weight:bold;
 }
 
-.home-btn:hover{
-    background:#2980b9;
-}
-
-/* ===== UPLOAD SECTION ===== */
-.upload-section{
-    margin:30px auto;
-    padding:25px;
-    background:rgba(255,255,255,0.08);
-    border-radius:18px;
+.header{
     text-align:center;
+    padding:20px;
+}
+
+.header h1{
+    color:#2ecc71;
+}
+
+.card{
     width:90%;
     max-width:500px;
-}
-
-.upload-buttons{
-    display:flex;
-    gap:15px;
-    justify-content:center;
-    flex-wrap:wrap;
-    margin-top:15px;
-}
-
-.upload-btn{
-    background:linear-gradient(135deg,#2ecc71,#27ae60);
-    color:white;
-    padding:12px 18px;
-    border-radius:12px;
-    cursor:pointer;
-    font-weight:bold;
-    min-width:180px;
+    margin:20px auto;
+    background:rgba(255,255,255,0.06);
+    padding:20px;
+    border-radius:18px;
     text-align:center;
 }
 
-/* ===== CAMERA MODAL ===== */
-.camera-box{
+.btn{
+    padding:12px 18px;
+    margin:8px;
+    border:none;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.green{
+    background:#2ecc71;
+    color:white;
+}
+
+.red{
+    background:#e74c3c;
+    color:white;
+}
+
+img{
+    width:100%;
+    max-width:320px;
+    margin-top:15px;
+    border-radius:15px;
+    display:none;
+}
+
+input[type=file]{
+    display:none;
+}
+
+.camera{
     display:none;
     position:fixed;
     top:0;
@@ -78,8 +74,8 @@ body{
     height:100%;
     background:black;
     flex-direction:column;
-    align-items:center;
     justify-content:center;
+    align-items:center;
 }
 
 video{
@@ -88,78 +84,49 @@ video{
     border-radius:10px;
 }
 
-.camera-controls{
-    margin-top:15px;
-    display:flex;
-    gap:10px;
-}
-
-.btn{
-    padding:10px 15px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.close-btn{
-    background:red;
-    color:white;
-}
-
-.capture-btn{
-    background:green;
-    color:white;
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- ===== TOP BAR ===== -->
-<div class="topbar">
-    <h3>Upload Gambar</h3>
-    <a href="/" class="home-btn">🏠 Beranda</a>
+<div class="header">
+    <h1>🌿 Deteksi Penyakit Kentang</h1>
 </div>
 
-<!-- ===== UPLOAD ===== -->
-<div class="upload-section">
+<div class="card">
 
-    <h2>📤 Upload Gambar Daun Kentang</h2>
+    <h3>Pilih Gambar</h3>
 
-    <div class="upload-buttons">
+    <!-- GALERI -->
+    <label class="btn green">
+        📁 Galeri
+        <input type="file" id="fileInput" accept="image/*">
+    </label>
 
-        <!-- GALERI -->
-        <label class="upload-btn">
-            📁 Galeri
-            <input type="file" accept="image/*" style="display:none;">
-        </label>
+    <!-- KAMERA -->
+    <button class="btn green" onclick="openCamera()">
+        📷 Kamera
+    </button>
 
-        <!-- KAMERA -->
-        <button class="upload-btn" onclick="openCamera()">
-            📷 Kamera
+    <img id="preview">
+
+    <form action="/predict" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" id="hiddenInput">
+        <button type="submit" class="btn green" id="detectBtn" style="display:none;">
+            🔍 Deteksi
         </button>
-
-    </div>
+    </form>
 
 </div>
 
-<!-- ===== CAMERA MODAL ===== -->
-<div class="camera-box" id="cameraBox">
+<!-- CAMERA -->
+<div class="camera" id="cameraBox">
 
     <video id="video" autoplay></video>
 
-    <div class="camera-controls">
-
-        <button class="btn capture-btn" onclick="capture()">
-            Ambil Foto
-        </button>
-
-        <button class="btn close-btn" onclick="closeCamera()">
-            Tutup Kamera
-        </button>
-
+    <div>
+        <button class="btn green" onclick="capture()">Ambil</button>
+        <button class="btn red" onclick="closeCamera()">Tutup</button>
     </div>
 
 </div>
@@ -168,31 +135,70 @@ video{
 
 let stream;
 
+const fileInput = document.getElementById("fileInput");
+const preview = document.getElementById("preview");
+const hiddenInput = document.getElementById("hiddenInput");
+const detectBtn = document.getElementById("detectBtn");
+
+/* GALERI */
+fileInput.onchange = function(){
+    const file = this.files[0];
+
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = "block";
+
+    hiddenInput.files = this.files;
+    detectBtn.style.display = "inline-block";
+}
+
+/* CAMERA */
 async function openCamera(){
+
     const video = document.getElementById("video");
-    const box = document.getElementById("cameraBox");
+    document.getElementById("cameraBox").style.display = "flex";
 
     stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "environment" }
+        video:{facingMode:"environment"}
     });
 
     video.srcObject = stream;
-    box.style.display = "flex";
 }
 
 function closeCamera(){
-    const video = document.getElementById("video");
-
     if(stream){
-        stream.getTracks().forEach(track => track.stop());
+        stream.getTracks().forEach(t => t.stop());
     }
-
-    video.srcObject = null;
     document.getElementById("cameraBox").style.display = "none";
 }
 
 function capture(){
-    alert("Fitur capture bisa disambungkan ke backend Flask nanti 👍");
+
+    const video = document.getElementById("video");
+
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    canvas.getContext("2d").drawImage(video,0,0);
+
+    canvas.toBlob(blob => {
+
+        const file = new File([blob],"camera.jpg",{type:"image/jpeg"});
+
+        let dt = new DataTransfer();
+        dt.items.add(file);
+
+        hiddenInput.files = dt.files;
+
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+
+        detectBtn.style.display = "inline-block";
+
+        closeCamera();
+
+    });
+
 }
 
 </script>

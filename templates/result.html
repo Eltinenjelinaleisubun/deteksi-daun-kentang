@@ -2,275 +2,70 @@
 <html lang="id">
 
 <head>
-
-    <meta charset="UTF-8">
-
-    <!-- RESPONSIVE MOBILE -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Hasil Deteksi</title>
-
-    <style>
-
-        /* ================= RESET ================= */
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        /* ================= BODY ================= */
-
-        body{
-
-            min-height:100vh;
-
-            display:flex;
-            justify-content:center;
-            align-items:center;
-
-            padding:20px;
-
-            color:white;
-
-            position:relative;
-
-            overflow-x:hidden;
-
-            background:#000;
-        }
-
-        /* ================= BACKGROUND ================= */
-
-        body::before{
-
-            content:"";
-
-            position:fixed;
-
-            top:0;
-            left:0;
-
-            width:100%;
-            height:100%;
-
-            background:
-            url('/static/images/Bc.jpeg')
-            no-repeat center/cover;
-
-            filter:blur(12px) brightness(0.5);
-
-            z-index:-2;
-        }
-
-        body::after{
-
-            content:"";
-
-            position:fixed;
-
-            top:0;
-            left:0;
-
-            width:100%;
-            height:100%;
-
-            background:rgba(0,0,0,0.4);
-
-            z-index:-1;
-        }
-
-        /* ================= RESULT CARD ================= */
-
-        .result-card{
-
-            width:100%;
-            max-width:420px;
-
-            background:rgba(255,255,255,0.95);
-
-            border-radius:20px;
-
-            padding:30px 25px;
-
-            text-align:center;
-
-            box-shadow:0 10px 30px rgba(0,0,0,0.4);
-
-            transition:0.3s;
-
-            backdrop-filter:blur(5px);
-        }
-
-        .result-card:hover{
-
-            transform:translateY(-5px);
-
-            box-shadow:0 15px 35px rgba(0,0,0,0.5);
-        }
-
-        /* ================= TITLE ================= */
-
-        .result-card h2{
-
-            margin-bottom:20px;
-
-            font-size:30px;
-
-            color:#2e7d32;
-        }
-
-        /* ================= IMAGE ================= */
-
-        .result-card img{
-
-            width:100%;
-
-            max-width:320px;
-
-            border-radius:15px;
-
-            margin-bottom:20px;
-
-            box-shadow:0 5px 15px rgba(0,0,0,0.3);
-
-            transition:0.3s;
-        }
-
-        .result-card img:hover{
-
-            transform:scale(1.02);
-        }
-
-        /* ================= RESULT TEXT ================= */
-
-        .result-card h3{
-
-            font-size:24px;
-
-            color:#4CAF50;
-
-            margin-bottom:25px;
-
-            word-wrap:break-word;
-        }
-
-        /* ================= BUTTON ================= */
-
-        .back-btn{
-
-            display:inline-block;
-
-            padding:12px 24px;
-
-            background:#4CAF50;
-
-            color:white;
-
-            font-weight:bold;
-
-            text-decoration:none;
-
-            border-radius:12px;
-
-            transition:0.3s;
-
-            box-shadow:0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .back-btn:hover{
-
-            background:#388E3C;
-
-            transform:scale(1.04);
-        }
-
-        /* ================= RESPONSIVE MOBILE ================= */
-
-        @media screen and (max-width:768px){
-
-            body{
-                padding:15px;
-            }
-
-            .result-card{
-
-                padding:25px 18px;
-
-                border-radius:18px;
-            }
-
-            .result-card h2{
-
-                font-size:26px;
-            }
-
-            .result-card h3{
-
-                font-size:20px;
-            }
-
-            .back-btn{
-
-                width:100%;
-
-                padding:12px;
-
-                font-size:15px;
-            }
-
-        }
-
-        @media screen and (max-width:400px){
-
-            .result-card h2{
-
-                font-size:22px;
-            }
-
-            .result-card h3{
-
-                font-size:18px;
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hasil Deteksi</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Segoe UI, sans-serif;
+    background:#0b0f0c;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.card{
+    background:rgba(255,255,255,0.08);
+    padding:25px;
+    border-radius:18px;
+    text-align:center;
+    width:90%;
+    max-width:450px;
+}
+
+h2{
+    color:#2ecc71;
+}
+
+img{
+    width:100%;
+    border-radius:15px;
+    margin-top:15px;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:15px;
+    padding:12px 18px;
+    background:#2ecc71;
+    color:white;
+    text-decoration:none;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+</style>
 </head>
 
 <body>
 
-<!-- ================= RESULT CARD ================= -->
+<div class="card">
 
-<div class="result-card">
+    <h2>🌿 Hasil Deteksi</h2>
 
-    <h2>
-        🌿 Hasil Deteksi
-    </h2>
+    <img src="{{ url_for('static', filename='uploads/' + filename) }}">
 
-    <!-- IMAGE -->
+    <h3>{{ label }}</h3>
 
-    <img
-        src="/{{ img }}"
-        alt="Hasil Deteksi"
-    >
+    <p>Akurasi: {{ conf }}%</p>
 
-    <!-- RESULT -->
-
-    <h3>
-        {{ result }}
-    </h3>
-
-    <!-- BUTTON -->
-
-    <a
-        href="/detect"
-        class="back-btn"
-    >
-        ← Kembali
+    <a href="{{ url_for('home') }}" class="btn">
+        ← Beranda
     </a>
 
 </div>
