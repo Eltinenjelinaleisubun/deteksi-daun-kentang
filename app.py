@@ -706,6 +706,10 @@ def test():
 
     return "FLASK BERHASIL BERJALAN"
 
+@app.route('/informasi')
+def informasi():
+    return render_template('informasi.html')
+    
 # =====================================================
 # RUN APP
 # =====================================================

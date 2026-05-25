@@ -31,6 +31,7 @@
             background:#000;
             position:relative;
             color:white;
+            overflow-x:hidden;
         }
 
         /* ================= BACKGROUND ================= */
@@ -62,39 +63,63 @@
         /* ================= NAVBAR ================= */
 
         .navbar{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:20px 30px;
-            background:rgba(0,0,0,0.5);
-            backdrop-filter:blur(5px);
-            position:sticky;
-            top:0;
-            z-index:100;
+            padding:35px 22px 10px;
         }
 
         .navbar h1{
-            font-size:30px;
+            font-size:22px;
+            font-weight:700;
+            margin-bottom:35px;
+
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
         }
+
+        /* ================= MENU ================= */
 
         .nav-links{
             display:flex;
-            gap:15px;
+            flex-direction:column;
+            gap:10px;
         }
 
         .nav-links a{
             text-decoration:none;
             color:white;
-            background:#4CAF50;
-            padding:10px 18px;
-            border-radius:10px;
+
+            padding:20px 0;
+
+            font-size:20px;
             font-weight:bold;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            border-bottom:1px solid rgba(255,255,255,0.15);
+
             transition:0.3s;
         }
 
         .nav-links a:hover{
-            background:#388E3C;
-            transform:scale(1.05);
+            transform:translateX(5px);
+        }
+
+        .menu-left{
+            display:flex;
+            align-items:center;
+            gap:14px;
+        }
+
+        .icon{
+            width:30px;
+            text-align:center;
+        }
+
+        .arrow{
+            font-size:34px;
+            color:white;
         }
 
         /* ================= CONTAINER ================= */
@@ -103,105 +128,57 @@
             width:100%;
             max-width:1200px;
             margin:auto;
-            padding:30px 20px;
+            padding:25px 20px;
         }
 
         /* ================= MAIN MENU ================= */
 
         .main-menu{
             background:rgba(255,255,255,0.92);
-            border-radius:18px;
-            padding:45px;
+            border-radius:25px;
+            padding:30px 25px;
             box-shadow:0 6px 20px rgba(0,0,0,0.25);
-            text-align:center;
             backdrop-filter:blur(4px);
             color:#333;
+            margin-top:25px;
         }
 
         .main-menu h2{
             margin-bottom:18px;
-            font-size:32px;
+            font-size:28px;
             color:#2e7d32;
         }
 
         .main-menu p{
             margin-bottom:25px;
-            font-size:17px;
-            line-height:1.6;
+            font-size:16px;
+            line-height:1.7;
         }
 
         /* ================= BUTTON ================= */
 
         .btn-main{
-            display:inline-block;
+            display:block;
+            width:100%;
+
             background:#4CAF50;
             color:white;
-            padding:14px 28px;
-            border-radius:10px;
+
+            padding:15px;
+
+            border-radius:12px;
+
             text-decoration:none;
             font-weight:bold;
+
             transition:0.3s;
             font-size:16px;
+
+            text-align:center;
         }
 
         .btn-main:hover{
             background:#388E3C;
-            transform:scale(1.05);
-        }
-
-        /* ================= EDUKASI ================= */
-
-        .education-title{
-            text-align:center;
-            margin-bottom:25px;
-            color:white;
-            font-size:32px;
-        }
-
-        .education-section{
-            display:grid;
-            grid-template-columns:
-            repeat(auto-fit, minmax(280px, 1fr));
-            gap:22px;
-        }
-
-        /* ================= CARD ================= */
-
-        .edu-card{
-            background:rgba(255,255,255,0.92);
-            border-radius:16px;
-            padding:22px;
-            box-shadow:0 6px 20px rgba(0,0,0,0.2);
-            transition:0.3s;
-            backdrop-filter:blur(3px);
-            color:#333;
-        }
-
-        .edu-card:hover{
-            transform:translateY(-5px);
-            box-shadow:0 10px 25px rgba(0,0,0,0.3);
-        }
-
-        .edu-card h3{
-            color:#4CAF50;
-            margin-bottom:12px;
-            font-size:24px;
-        }
-
-        .edu-card p{
-            font-size:15px;
-            line-height:1.6;
-            margin-bottom:10px;
-        }
-
-        .edu-card ul{
-            margin-left:20px;
-            margin-bottom:12px;
-        }
-
-        .edu-card li{
-            margin-bottom:8px;
-            line-height:1.5;
         }
 
         /* ================= FOOTER ================= */
@@ -211,83 +188,44 @@
             padding:20px;
             background:rgba(0,0,0,0.5);
             margin-top:30px;
-            font-size:15px;
+            font-size:14px;
             backdrop-filter:blur(5px);
         }
 
-        /* ================= RESPONSIVE MOBILE ================= */
+        /* ================= DESKTOP ================= */
 
-        @media screen and (max-width:768px){
+        @media screen and (min-width:769px){
 
             .navbar{
-                flex-direction:column;
-                gap:18px;
-                text-align:center;
-                padding:18px;
+                max-width:900px;
+                margin:auto;
+                padding-top:45px;
             }
 
             .navbar h1{
-                font-size:22px;
+                font-size:48px;
+                white-space:normal;
             }
 
             .nav-links{
-                width:100%;
-                flex-direction:column;
+                gap:15px;
             }
 
             .nav-links a{
-                width:100%;
-                text-align:center;
-                padding:12px;
-                font-size:15px;
+                font-size:28px;
+                padding:24px 0;
             }
 
             .container{
-                padding:20px 15px;
-            }
-
-            .main-menu{
-                padding:28px 20px;
+                max-width:900px;
             }
 
             .main-menu h2{
-                font-size:25px;
+                font-size:36px;
             }
 
             .main-menu p{
-                font-size:15px;
-            }
-
-            .btn-main{
-                width:100%;
-                padding:14px;
-                font-size:16px;
-            }
-
-            .education-title{
-                font-size:25px;
-            }
-
-            .education-section{
-                grid-template-columns:1fr;
-            }
-
-            .edu-card{
-                padding:18px;
-            }
-
-            .edu-card h3{
-                font-size:22px;
-            }
-
-            .edu-card p,
-            .edu-card li{
-                font-size:14px;
-            }
-
-            .footer{
-                font-size:14px;
-                padding:16px;
+                font-size:18px;
             }
 
         }
@@ -303,25 +241,64 @@
     <div class="navbar">
 
         <h1>
-            🌿 Sistem Deteksi Penyakit Tanaman Kentang
+            🌿 Deteksi Penyakit Tanaman Kentang
         </h1>
 
         <div class="nav-links">
 
             <a href="{{ url_for('home') }}">
-                🏠 Beranda
+
+                <div class="menu-left">
+                    <span class="icon">🏠</span>
+                    <span>Beranda</span>
+                </div>
+
+                <span class="arrow">›</span>
+
             </a>
 
             <a href="{{ url_for('history') }}">
-                📋 Riwayat
+
+                <div class="menu-left">
+                    <span class="icon">📋</span>
+                    <span>Riwayat</span>
+                </div>
+
+                <span class="arrow">›</span>
+
             </a>
 
             <a href="{{ url_for('profil') }}">
-                👤 Profil
+
+                <div class="menu-left">
+                    <span class="icon">👤</span>
+                    <span>Profil</span>
+                </div>
+
+                <span class="arrow">›</span>
+
+            </a>
+
+            <a href="{{ url_for('informasi') }}">
+
+                <div class="menu-left">
+                    <span class="icon">ℹ️</span>
+                    <span>Informasi</span>
+                </div>
+
+                <span class="arrow">›</span>
+
             </a>
 
             <a href="{{ url_for('logout') }}">
-                🚪 Logout
+
+                <div class="menu-left">
+                    <span class="icon">🚪</span>
+                    <span>Logout</span>
+                </div>
+
+                <span class="arrow">›</span>
+
             </a>
 
         </div>
@@ -349,92 +326,6 @@
                Mulai Deteksi
 
             </a>
-
-        </div>
-
-    </div>
-
-    <!-- ================= EDUKASI ================= -->
-
-    <div class="container">
-
-        <h2 class="education-title">
-            📚 Informasi Penyakit & Daun Sehat
-        </h2>
-
-        <div class="education-section">
-
-            <!-- EARLY BLIGHT -->
-
-            <div class="edu-card">
-
-                <h3>🍂 Early Blight</h3>
-
-                <p><strong>Gejala:</strong></p>
-
-                <ul>
-                    <li>Bercak coklat berbentuk cincin pada daun</li>
-                    <li>Daun menguning dan mulai gugur</li>
-                    <li>Muncul di bagian bawah tanaman</li>
-                </ul>
-
-                <p><strong>Pencegahan:</strong></p>
-
-                <ul>
-                    <li>Pangkas daun yang sakit</li>
-                    <li>Kurangi kelembapan berlebih</li>
-                    <li>Rotasi tanaman secara rutin</li>
-                </ul>
-
-            </div>
-
-            <!-- LATE BLIGHT -->
-
-            <div class="edu-card">
-
-                <h3>🌱 Late Blight</h3>
-
-                <p><strong>Gejala:</strong></p>
-
-                <ul>
-                    <li>Bercak coklat gelap pada daun</li>
-                    <li>Daun cepat layu dan membusuk</li>
-                    <li>Sering muncul saat cuaca lembap</li>
-                </ul>
-
-                <p><strong>Pencegahan:</strong></p>
-
-                <ul>
-                    <li>Kurangi kelembapan area tanam</li>
-                    <li>Gunakan fungisida bila diperlukan</li>
-                    <li>Buang daun yang terinfeksi</li>
-                </ul>
-
-            </div>
-
-            <!-- HEALTHY -->
-
-            <div class="edu-card">
-
-                <h3>✅ Daun Sehat</h3>
-
-                <p><strong>Ciri-ciri:</strong></p>
-
-                <ul>
-                    <li>Warna hijau merata</li>
-                    <li>Tidak ada bercak hitam/coklat</li>
-                    <li>Daun terlihat segar dan kuat</li>
-                </ul>
-
-                <p><strong>Perawatan:</strong></p>
-
-                <ul>
-                    <li>Penyiraman teratur</li>
-                    <li>Pemberian pupuk sesuai kebutuhan</li>
-                    <li>Pengecekan daun secara rutin</li>
-                </ul>
-
-            </div>
 
         </div>
 
