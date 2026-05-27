@@ -293,7 +293,7 @@
         🌿 Hasil Deteksi
     </div>
 
-    {% if img %}
+    {% if img is defined and img %}
 
         <img
             src="{{ url_for('static', filename='uploads/' + img) }}"
@@ -304,8 +304,7 @@
         <div class="status">
 
             Status:
-            {{ result.replace('_', ' ') }}
-
+            {{ result | replace('_', ' ') }}
         </div>
 
         <div class="confidence">
@@ -317,13 +316,13 @@
 
         <!-- BADGE -->
 
-        {% if 'Healthy' in result %}
+        {% if result and 'Healthy' in result %}
 
             <div class="badge-result healthy">
                 Tanaman Sehat
             </div>
 
-        {% elif 'Early' in result %}
+        {% elif result and 'Early' in result %}
 
             <div class="badge-result early">
                 Early Blight
