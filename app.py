@@ -276,25 +276,20 @@ def predict_image(img_path):
         # IMAGE TO ARRAY
         img_array = image.img_to_array(img)
 
-        # PREPROCESS
-        img_array = preprocess_input(img_array)
-
         # EXPAND DIMENSION
         img_array = np.expand_dims(img_array, axis=0)
 
-        # PREDICT
-        pred = model.predict(img_array)
+        # PREPROCESS
+        img_array = preprocess_input(img_array)
 
-        # CLASS INDEX
-        class_idx = np.argmax(pred)
+        # PREDICT
+        prediction = model.predict(img_array)
+
+        # AMBIL INDEX
+        class_idx = int(np.argmax(prediction))
 
         # CONFIDENCE
-        confidence = float(np.max(pred)) * 100
-
-        # FILTER NON DAUN
-        if confidence < 70:
-
-            return "Error: Gambar bukan daun kentang", round(confidence, 2)
+        confidence = float(np.max(prediction)) * 100
 
         # LABEL
         result = labels.get(class_idx, "Unknown")
@@ -306,7 +301,7 @@ def predict_image(img_path):
         print("ERROR PREDICT:")
         print(e)
 
-        return "Terjadi error saat prediksi", 0
+        return "Prediksi gagal", 0
 
 # =====================================================
 # LOGIN
@@ -577,21 +572,33 @@ def detect():
 
     if request.method == 'POST':
 
-        if 'image' not in request.files:
+        try:
 
-            flash('File tidak ditemukan', 'error')
+            # ================= CHECK IMAGE =================
 
-            return redirect(request.url)
+            if 'image' not in request.files:
 
-        file = request.files['image']
+                flash('Gambar tidak ditemukan', 'error')
 
-        if file.filename == '':
+                return redirect(url_for('detect'))
 
-            flash('File kosong', 'error')
+            file = request.files['image']
 
-            return redirect(request.url)
+            if file.filename == '':
 
-        if file and allowed_file(file.filename):
+                flash('Silakan pilih gambar', 'error')
+
+                return redirect(url_for('detect'))
+
+            # ================= VALIDASI FORMAT =================
+
+            if not allowed_file(file.filename):
+
+                flash('Format file tidak didukung', 'error')
+
+                return redirect(url_for('detect'))
+
+            # ================= SAVE FILE =================
 
             ext = file.filename.rsplit('.', 1)[1].lower()
 
@@ -606,7 +613,16 @@ def detect():
 
             file.save(filepath)
 
+            print("FILE BERHASIL DISIMPAN:", filepath)
+
+            # ================= PREDICT =================
+
             result, confidence = predict_image(filepath)
+
+            print("HASIL:", result)
+            print("CONFIDENCE:", confidence)
+
+            # ================= SAVE HISTORY =================
 
             conn = get_db_connection()
 
@@ -634,18 +650,23 @@ def detect():
 
             conn.close()
 
+            # ================= SHOW RESULT =================
+
             return render_template(
                 'result.html',
                 result=result,
                 confidence=confidence,
-                img=filepath
+                img=filename
             )
 
-        else:
+        except Exception as e:
 
-            flash('Format file tidak didukung', 'error')
+            print("ERROR DETECT:")
+            print(e)
 
-            return redirect(request.url)
+            flash(f'Terjadi error: {e}', 'error')
+
+            return redirect(url_for('detect'))
 
     return render_template('detect.html')
 
