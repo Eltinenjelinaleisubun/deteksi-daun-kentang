@@ -5,7 +5,8 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Deteksi Penyakit Kentang</title>
 
@@ -18,166 +19,264 @@
 }
 
 body{
+
     font-family:'Segoe UI', Tahoma, sans-serif;
+
     min-height:100vh;
+
     display:flex;
     flex-direction:column;
+
     align-items:center;
+
     padding:20px;
+
     position:relative;
+
     overflow-x:hidden;
 }
 
 /* ================= BACKGROUND ================= */
 
 .background{
+
     position:fixed;
+
     top:0;
     left:0;
+
     width:100%;
     height:100%;
+
     background-image:url("{{ url_for('static', filename='images/Bc.jpeg') }}");
+
     background-size:cover;
+
     background-position:center;
+
     filter:blur(8px) brightness(0.6);
+
     z-index:-1;
 }
 
 /* ================= HEADER ================= */
 
 header{
+
     width:100%;
+
     max-width:900px;
+
     margin-top:20px;
+
     padding:16px;
+
     background:#b47b12;
+
     color:white;
+
     text-align:center;
+
     font-size:1.5em;
+
     font-weight:bold;
+
     border-radius:15px;
+
     box-shadow:0 4px 15px rgba(0,0,0,0.3);
 }
 
 /* ================= BERANDA ================= */
 
 .home-top{
+
     position:fixed;
+
     top:20px;
     right:20px;
+
     background:#4CAF50;
+
     color:white;
+
     padding:10px 18px;
+
     border-radius:10px;
+
     text-decoration:none;
+
     font-weight:bold;
+
     z-index:999;
+
     transition:0.3s;
 }
 
 .home-top:hover{
+
     background:#388E3C;
 }
 
 /* ================= CONTAINER ================= */
 
 .upload-container{
+
     width:100%;
+
     max-width:450px;
+
     margin-top:30px;
+
     background:rgba(180,230,207,0.95);
+
     padding:25px;
+
     border-radius:18px;
+
     display:flex;
+
     flex-direction:column;
+
     gap:15px;
+
     box-shadow:0 8px 25px rgba(0,0,0,0.3);
 }
 
 /* ================= BUTTON ================= */
 
 .upload-btn{
+
     background:white;
+
     padding:14px;
+
     border-radius:12px;
+
     text-align:center;
+
     font-weight:bold;
+
     cursor:pointer;
+
     transition:0.3s;
 }
 
 .upload-btn:hover{
+
     background:#f0f0f0;
 }
 
-input[type="file"]{
+/* INPUT FILE ASLI */
+
+#imageInput{
+
     display:none;
 }
 
 /* ================= VIDEO ================= */
 
 video{
+
     width:100%;
+
     height:250px;
+
     object-fit:cover;
+
     border-radius:15px;
+
     background:black;
 }
 
 /* ================= CAMERA BUTTON ================= */
 
 .camera-btn{
+
     background:#ff9800;
+
     color:white;
+
     border:none;
+
     padding:13px;
+
     border-radius:12px;
+
     font-size:1em;
+
     font-weight:bold;
+
     cursor:pointer;
+
     transition:0.3s;
 }
 
 .camera-btn:hover{
+
     background:#e68900;
 }
 
 /* ================= PREVIEW ================= */
 
 .preview{
+
     width:100%;
+
     min-height:220px;
+
     border:2px dashed white;
+
     border-radius:15px;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     overflow:hidden;
+
     background:rgba(0,0,0,0.15);
+
     color:white;
+
+    font-weight:bold;
 }
 
 .preview img{
+
     width:100%;
+
     height:100%;
+
     object-fit:cover;
 }
 
 /* ================= DETECT BUTTON ================= */
 
 #deteksiBtn{
+
     background:green;
+
     color:white;
+
     border:none;
+
     padding:14px;
+
     border-radius:12px;
+
     font-size:1em;
+
     font-weight:bold;
+
     cursor:pointer;
+
     transition:0.3s;
 }
 
 #deteksiBtn:hover{
+
     background:#006400;
 }
 
@@ -186,15 +285,19 @@ video{
 @media(max-width:768px){
 
     header{
+
         margin-top:70px;
+
         font-size:1.2em;
     }
 
     .upload-container{
+
         padding:18px;
     }
 
     video{
+
         height:220px;
     }
 
@@ -212,102 +315,120 @@ video{
     🌿 Patogen Kentang Detector
 </header>
 
-<a href="{{ url_for('home') }}" class="home-top">
+<a
+    href="{{ url_for('home') }}"
+    class="home-top">
+
     🏠 Beranda
+
 </a>
 
-<div class="upload-container">
+<!-- ================= FORM ================= -->
 
-    <!-- UPLOAD -->
+<form
+    id="deteksiForm"
+    method="POST"
+    action="{{ url_for('detect') }}"
+    enctype="multipart/form-data">
 
-    <label class="upload-btn">
+    <div class="upload-container">
 
-        📁 Unggah dari Galeri
+        <!-- INPUT FILE -->
 
         <input
             type="file"
-            id="galleryInput"
+            id="imageInput"
+            name="image"
             accept="image/*">
 
-    </label>
+        <!-- BUTTON GALERI -->
 
-    <!-- VIDEO -->
+        <label
+            for="imageInput"
+            class="upload-btn">
 
-    <video
-        id="video"
-        autoplay
-        muted
-        playsinline>
-    </video>
+            📁 Unggah dari Galeri
 
-    <!-- CAMERA BUTTON -->
+        </label>
 
-    <button
-        type="button"
-        class="camera-btn"
-        id="captureBtn">
+        <!-- VIDEO -->
 
-        📸 Jepret Kamera
+        <video
+            id="video"
+            autoplay
+            muted
+            playsinline>
+        </video>
 
-    </button>
+        <!-- CAMERA BUTTON -->
 
-    <!-- CANVAS -->
+        <button
+            type="button"
+            class="camera-btn"
+            id="captureBtn">
 
-    <canvas
-        id="canvas"
-        style="display:none;">
-    </canvas>
+            📸 Jepret Kamera
 
-    <!-- PREVIEW -->
+        </button>
 
-    <div
-        class="preview"
-        id="preview">
+        <!-- CANVAS -->
 
-        Preview Gambar
+        <canvas
+            id="canvas"
+            style="display:none;">
+        </canvas>
+
+        <!-- PREVIEW -->
+
+        <div
+            class="preview"
+            id="preview">
+
+            Preview Gambar
+
+        </div>
+
+        <!-- DETECT -->
+
+        <button
+            type="submit"
+            id="deteksiBtn">
+
+            🔍 Deteksi
+
+        </button>
 
     </div>
 
-    <!-- FORM -->
-
-    <form
-        id="deteksiForm"
-        method="POST"
-        action="{{ url_for('detect') }}"
-        enctype="multipart/form-data">
-    </form>
-
-    <!-- DETECT -->
-
-    <button
-        type="submit"
-        id="deteksiBtn"
-        form="deteksiForm">
-
-        🔍 Deteksi
-
-    </button>
-
-</div>
+</form>
 
 <script>
 
 // ================= ELEMENT =================
 
-const galleryInput = document.getElementById("galleryInput");
-const video = document.getElementById("video");
-const canvas = document.getElementById("canvas");
-const preview = document.getElementById("preview");
-const form = document.getElementById("deteksiForm");
-const captureBtn = document.getElementById("captureBtn");
+const imageInput =
+document.getElementById("imageInput");
 
-// ================= BUKA KAMERA =================
+const video =
+document.getElementById("video");
+
+const canvas =
+document.getElementById("canvas");
+
+const preview =
+document.getElementById("preview");
+
+const captureBtn =
+document.getElementById("captureBtn");
+
+// ================= CAMERA =================
 
 async function startCamera(){
 
     try{
 
-        const stream = await navigator.mediaDevices.getUserMedia({
+        const stream =
+        await navigator.mediaDevices.getUserMedia({
 
             video:{
                 facingMode:"environment"
@@ -339,7 +460,7 @@ startCamera();
 
 // ================= UPLOAD GALERI =================
 
-galleryInput.addEventListener("change", function(){
+imageInput.addEventListener("change", function(){
 
     const file = this.files[0];
 
@@ -347,46 +468,65 @@ galleryInput.addEventListener("change", function(){
 
     showPreview(file);
 
-    setFormFile(file);
-
 });
 
-// ================= JEPRET KAMERA =================
+// ================= JEPRET CAMERA =================
 
 captureBtn.addEventListener("click", function(){
 
     const ctx = canvas.getContext("2d");
 
     canvas.width = video.videoWidth;
+
     canvas.height = video.videoHeight;
 
     ctx.drawImage(
+
         video,
+
         0,
+
         0,
+
         canvas.width,
+
         canvas.height
+
     );
 
     canvas.toBlob(function(blob){
 
         const file = new File(
+
             [blob],
+
             "camera.jpg",
+
             {
                 type:"image/jpeg"
             }
+
         );
+
+        // PREVIEW
 
         showPreview(file);
 
-        setFormFile(file);
+        // MASUKKAN KE INPUT FILE
 
-    }, "image/jpeg");
+        const dt = new DataTransfer();
+
+        dt.items.add(file);
+
+        imageInput.files = dt.files;
+
+    },
+
+    "image/jpeg");
 
 });
 
-// ================= SHOW PREVIEW =================
+// ================= PREVIEW =================
 
 function showPreview(file){
 
@@ -395,31 +535,12 @@ function showPreview(file){
     reader.onload = function(e){
 
         preview.innerHTML =
+
         `<img src="${e.target.result}">`;
 
     };
 
     reader.readAsDataURL(file);
-
-}
-
-// ================= SET FORM FILE =================
-
-function setFormFile(file){
-
-    form.innerHTML = "";
-
-    const dt = new DataTransfer();
-
-    dt.items.add(file);
-
-    const input = document.createElement("input");
-
-    input.type = "file";
-    input.name = "image";
-    input.files = dt.files;
-
-    form.appendChild(input);
 
 }
 
